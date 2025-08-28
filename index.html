@@ -11,11 +11,12 @@ body, html { margin:0; padding:0; font-family:Arial,sans-serif; background:black
   display:flex; justify-content:center; align-items:center;
   font-size:36px; cursor:pointer; background:black; z-index:9999;
 }
+#page-content, #music-controls, #bottom-buttons { display:none; }
 body.entered { background:url('https://imgs.search.brave.com/x1L4RBHwDSW4bFoHqyaImJxdIOjjrJ78OjO5tgYcn7c/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9tZWRp/YTEudGVub3IuY29t/L20vc1NKWU4xRWdw/aU1BQUFBZC9ibGFj/ay1hZXN0aGV0aWMt/Z2lmLmdpZg.gif?v=1') center center fixed; background-size:cover; }
-#page-content { display:flex; flex-direction:column; align-items:center; justify-content:flex-start; min-height:100vh; padding-top:20px; }
+#page-content { display:flex; flex-direction:column; align-items:center; padding-top:20px; }
 .row { display:flex; gap:20px; margin-bottom:20px; justify-content:center; }
 .flip-card { background-color:transparent; width:180px; height:260px; perspective:1000px; }
-.flip-card-inner { position:relative; width:100%; height:100%; text-align:center; transition: transform 0.6s; transform-style: preserve-3d; }
+.flip-card-inner { position:relative; width:100%; height:100%; transition: transform 0.6s; transform-style: preserve-3d; }
 .flip-card:hover .flip-card-inner { transform:rotateY(180deg); }
 .flip-card-front, .flip-card-back { position:absolute; width:100%; height:100%; backface-visibility:hidden; border:2px solid white; border-radius:12px; display:flex; flex-direction:column; justify-content:flex-start; align-items:center; color:white; overflow:hidden; text-shadow:1px 1px 3px black; }
 .flip-card-front { background:rgba(0,0,0,0.6); backdrop-filter:blur(4px); }
@@ -23,8 +24,9 @@ body.entered { background:url('https://imgs.search.brave.com/x1L4RBHwDSW4bFoHqya
 .flip-card-front span { margin-top:5px; font-weight:bold; }
 .flip-card-front .role { font-size:14px; font-weight:normal; color:#ccc; margin-top:2px; }
 .flip-card-back { background:rgba(0,0,0,0.85); transform:rotateY(180deg); font-size:14px; padding:15px; display:flex; justify-content:center; align-items:center; text-align:center; }
-#discord-button { position:fixed; bottom:20px; left:50%; transform:translateX(-50%); padding:8px 20px; border:2px solid white; border-radius:8px; text-decoration:none; color:white; background:rgba(255,255,255,0.1); display:none; font-weight:bold; }
-#music-controls { position:fixed; bottom:20px; right:20px; display:flex; flex-direction:column; align-items:center; background:rgba(0,0,0,0.6); padding:10px; border-radius:10px; gap:5px; display:none; }
+#bottom-buttons { position:fixed; bottom:20px; left:50%; transform:translateX(-50%); display:flex; gap:20px; }
+#bottom-buttons a { padding:8px 20px; border:2px solid white; border-radius:8px; text-decoration:none; color:white; background:rgba(255,255,255,0.1); font-weight:bold; }
+#music-controls { position:fixed; bottom:20px; right:20px; display:flex; flex-direction:column; align-items:center; background:rgba(0,0,0,0.6); padding:10px; border-radius:10px; gap:5px; }
 #song-title { font-weight:bold; margin-bottom:5px; max-width:200px; text-align:center; }
 .controls-row { display:flex; gap:5px; }
 button { padding:5px 10px; border:none; border-radius:5px; cursor:pointer; background:rgba(255,255,255,0.2); color:white; font-size:18px; }
@@ -36,131 +38,115 @@ button.active { background:white; color:black; }
 <body>
 
 <div id="enter-screen">CLICK TO ENTER</div>
+
+<div id="page-content">
+  <h1>@2n9 Roster</h1>
+  <div id="rows-container"></div>
+</div>
+
 <audio id="bg-music"></audio>
 
+<div id="bottom-buttons">
+  <a id="discord-button" href="https://discord.gg/PxkPnxM2Hb" target="_blank">JOIN DISCORD</a>
+  <a id="partner-button" href="https://tramatic.cc/desktop" target="_blank">NOW PARTNERED WITH TRAMATIC.CC</a>
+</div>
+
+<div id="music-controls">
+  <span id="song-title"></span>
+  <div class="controls-row">
+    <button id="prev">⏮️</button>
+    <button id="play">⏯️</button>
+    <button id="next">⏭️</button>
+    <button id="shuffle">🔀</button>
+    <button id="loop">🔁</button>
+  </div>
+  <div id="progress-container"><div id="progress-bar"></div></div>
+</div>
+
 <script>
-// Roster with 10 members
 const roster = [
-  {name:'@2n9Hanako', role:'Owner/founder', img:'images/hanako.jpg', bio:'Hanako is the founder of the 2n9 group.'},
-  {name:'@2n9Icey', role:'Member', img:'images/icey.jpg', bio:'Icey is the main editor and a high ranking representative.'},
-  {name:'@2n9Melo', role:'Member', img:'images/melo.jpg', bio:'Melo is badshit crazy and will do whatever it takes.'},
-  {name:'@2n9Tecca', role:'Member', img:'images/tecca.jpg', bio:'Tecca is the main artist and is a valued member.'},
-  {name:'@2n9FbiJr', role:'Member', img:'images/fbijr.jpg', bio:'He is special and a good scout to find targets.'},
-  {name:'@2n9Slutting', role:'Member', img:'images/slutting.jpg', bio:'Slutting is the main recruiter.'},
-  {name:'@2n9Zox', role:'Member', img:'images/zox.jpg', bio:'Zox is energetic and still somehow scary.'},
-  {name:'@2n9Nox', role:'Member', img:'images/nox.jpg', bio:'Nox is Zox\'s son and cool ash.'},
-  {name:'@2n9Juice12am', role:'Member', img:'images/juice12am.jpg', bio:'Juice is a scary nigga.'},
-  {name:'@2n9Banshee', role:'Member', img:'images/banshee.jpg', bio:'Banshee\'s just here for the fun.'},
+  {name:'@2n9Hanako', role:'Owner/founder', img:'images/hanako.jpg', bio:'Hanako is the founder.'},
+  {name:'@2n9Icey', role:'Member', img:'images/icey.jpg', bio:'Icey is the main editor.'},
+  {name:'@2n9Melo', role:'Member', img:'images/melo.jpg', bio:'Melo is crazy.'},
+  {name:'@2n9Tecca', role:'Member', img:'images/tecca.jpg', bio:'Tecca is the artist.'},
+  {name:'@2n9FbiJr', role:'Member', img:'images/fbijr.jpg', bio:'FbiJr is special.'},
+  {name:'@2n9Slutting', role:'Member', img:'images/slutting.jpg', bio:'Slutting recruits.'},
+  {name:'@2n9Zox', role:'Member', img:'images/zox.jpg', bio:'Zox is energetic.'},
+  {name:'@2n9Nox', role:'Member', img:'images/nox.jpg', bio:'Nox is Zox\'s son.'},
+  {name:'@2n9Juice12am', role:'Member', img:'images/juice12am.jpg', bio:'Juice is scary.'},
+  {name:'@2n9Banshee', role:'Member', img:'images/banshee.jpg', bio:'Banshee is fun.'},
 ];
 
 const songs = [
   {title:'Wasted - Juice Wrld Ft. Lil Uzi Vert', src:'music/wasted.mp3'},
-  {title:'Headshot - Lil Tjay Ft. Polo G, & Fivio Foreign', src:'music/song2.mp3'},
-  {title:'All the time - Destroy Lonely', src:'music/song3.mp3'},
-  {title:'Swervin - A Boogie Wit da Hoodie Ft 6ix9ine', src:'music/song4.mp3'},
-  {title:'Aint Nothin - Rich Amiri', src:'music/song5.mp3'}
+  {title:'Song 2', src:'music/song2.mp3'},
+  {title:'Song 3', src:'music/song3.mp3'}
 ];
 
+let currentIndex=0, isShuffle=false, isLoop=false;
 
-let currentIndex = 0;
-let isShuffle = false;
-let isLoop = false;
+const overlay=document.getElementById('enter-screen');
+const music=document.getElementById('bg-music');
+const rowsContainer=document.getElementById('rows-container');
+const songTitle=document.getElementById('song-title');
+const playBtn=document.getElementById('play');
+const prevBtn=document.getElementById('prev');
+const nextBtn=document.getElementById('next');
+const shuffleBtn=document.getElementById('shuffle');
+const loopBtn=document.getElementById('loop');
+const progressBar=document.getElementById('progress-bar');
+const pageContent=document.getElementById('page-content');
+const bottomButtons=document.getElementById('bottom-buttons');
 
-const overlay = document.getElementById('enter-screen');
-const music = document.getElementById('bg-music');
-
-overlay.addEventListener('click', () => {
-    music.src = songs[currentIndex].src;
-    music.play().catch(()=>{}); // safely start
-    initPage();
-});
-
-function initPage(){
+overlay.addEventListener('click',()=>{
     overlay.style.display='none';
     document.body.classList.add('entered');
+    pageContent.style.display='block';
+    document.getElementById('music-controls').style.display='flex';
+    bottomButtons.style.display='flex';
+    loadRoster();
+    loadSong();
+    music.play().catch(()=>{});
+});
 
-    const content = document.createElement('div');
-    content.id='page-content';
-    document.body.appendChild(content);
-
-    const title = document.createElement('h1');
-    title.textContent='@2n9 Roster';
-    content.appendChild(title);
-
-    // 2 rows of 5 cards
+function loadRoster(){
     for(let i=0;i<2;i++){
-        const rowDiv = document.createElement('div');
+        const rowDiv=document.createElement('div');
         rowDiv.className='row';
-        roster.slice(i*5,i*5+5).forEach(member=>{
-            const card=document.createElement('div');
-            card.className='flip-card';
+        roster.slice(i*5,i*5+5).forEach(m=>{
+            const card=document.createElement('div'); card.className='flip-card';
             card.innerHTML=`<div class="flip-card-inner">
-                <div class="flip-card-front">
-                    <img src="${member.img}">
-                    <span>${member.name}</span>
-                    <div class="role">${member.role}</div>
-                </div>
-                <div class="flip-card-back">${member.bio}</div>
+                <div class="flip-card-front"><img src="${m.img}"><span>${m.name}</span><div class="role">${m.role}</div></div>
+                <div class="flip-card-back">${m.bio}</div>
             </div>`;
             rowDiv.appendChild(card);
         });
-        content.appendChild(rowDiv);
+        rowsContainer.appendChild(rowDiv);
     }
-
-    // Discord button
-    const discordBtn=document.createElement('a');
-    discordBtn.id='discord-button';
-    discordBtn.href='https://discord.gg/PxkPnxM2Hb';
-    discordBtn.target='_blank';
-    discordBtn.textContent='JOIN DISCORD';
-    document.body.appendChild(discordBtn);
-    discordBtn.style.display='inline-block';
-
-    // Music controls
-    const controls=document.createElement('div');
-    controls.id='music-controls';
-    controls.style.display='flex';
-
-    const songTitle=document.createElement('span');
-    songTitle.id='song-title';
-    songTitle.textContent=songs[currentIndex].title;
-    controls.appendChild(songTitle);
-
-    const controlRow=document.createElement('div');
-    controlRow.className='controls-row';
-
-    const prevBtn=document.createElement('button'); prevBtn.textContent='⏮️'; prevBtn.onclick=()=>skipSong(-1);
-    const playBtn=document.createElement('button'); playBtn.textContent='⏯️'; playBtn.onclick=()=>music.paused?music.play():music.pause();
-    const nextBtn=document.createElement('button'); nextBtn.textContent='⏭️'; nextBtn.onclick=()=>skipSong(1);
-    const shuffleBtn=document.createElement('button'); shuffleBtn.textContent='🔀'; shuffleBtn.onclick=()=>{isShuffle=!isShuffle; shuffleBtn.classList.toggle('active');};
-    const loopBtn=document.createElement('button'); loopBtn.textContent='🔁'; loopBtn.onclick=()=>{isLoop=!isLoop; loopBtn.classList.toggle('active');};
-
-    controlRow.append(prevBtn,playBtn,nextBtn,shuffleBtn,loopBtn);
-    controls.appendChild(controlRow);
-
-    const progressContainer=document.createElement('div'); progressContainer.id='progress-container';
-    const progressBar=document.createElement('div'); progressBar.id='progress-bar'; progressContainer.appendChild(progressBar);
-    controls.appendChild(progressContainer);
-
-    document.body.appendChild(controls);
-
-    // Progress bar
-    music.ontimeupdate=()=>{ if(!isNaN(music.duration)) progressBar.style.width=(music.currentTime/music.duration)*100+'%'; }
-    music.onended=()=>{ if(isLoop){ music.currentTime=0; music.play(); } else { skipSong(1); } }
 }
 
-// Skip function
-function skipSong(direction){
-    if(isShuffle){
-        let nextIndex; do { nextIndex=Math.floor(Math.random()*songs.length); } while(nextIndex===currentIndex);
-        currentIndex=nextIndex;
-    } else { currentIndex=(currentIndex+direction+songs.length)%songs.length; }
+function loadSong(){
     music.src=songs[currentIndex].src;
+    songTitle.textContent=songs[currentIndex].title;
+}
+
+playBtn.onclick=()=>music.paused?music.play():music.pause();
+prevBtn.onclick=()=>skipSong(-1);
+nextBtn.onclick=()=>skipSong(1);
+shuffleBtn.onclick=()=>{isShuffle=!isShuffle; shuffleBtn.classList.toggle('active');};
+loopBtn.onclick=()=>{isLoop=!isLoop; loopBtn.classList.toggle('active');};
+
+music.ontimeupdate=()=>{ if(!isNaN(music.duration)) progressBar.style.width=(music.currentTime/music.duration)*100+'%'; }
+music.onended=()=>{ if(isLoop){ music.currentTime=0; music.play(); } else { skipSong(1); } }
+
+function skipSong(dir){
+    if(isShuffle){
+        let next; do{ next=Math.floor(Math.random()*songs.length);}while(next===currentIndex);
+        currentIndex=next;
+    }else{ currentIndex=(currentIndex+dir+songs.length)%songs.length; }
+    loadSong();
     music.play().catch(()=>{});
-    document.getElementById('song-title').textContent=songs[currentIndex].title;
 }
 </script>
 </body>
 </html>
-
-
