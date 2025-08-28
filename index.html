@@ -11,27 +11,28 @@ body, html { margin:0; padding:0; font-family:Arial,sans-serif; background:black
   display:flex; justify-content:center; align-items:center;
   font-size:36px; cursor:pointer; background:black; z-index:9999;
 }
-#page-content { display:flex; flex-direction:column; align-items:center; justify-content:flex-start; min-height:100vh; }
 body.entered { background:url('https://imgs.search.brave.com/x1L4RBHwDSW4bFoHqyaImJxdIOjjrJ78OjO5tgYcn7c/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9tZWRp/YTEudGVub3IuY29t/L20vc1NKWU4xRWdw/aU1BQUFBZC9ibGFj/ay1hZXN0aGV0aWMt/Z2lmLmdpZg.gif?v=1') center center fixed; background-size:cover; }
+#page-content { display:flex; flex-direction:column; align-items:center; justify-content:flex-start; min-height:100vh; }
 .container { display:flex; flex-wrap:wrap; gap:20px; margin-top:20px; justify-content:center; }
 .flip-card { background-color:transparent; width:180px; height:260px; perspective:1000px; }
 .flip-card-inner { position:relative; width:100%; height:100%; text-align:center; transition: transform 0.6s; transform-style: preserve-3d; }
 .flip-card:hover .flip-card-inner { transform:rotateY(180deg); }
-.flip-card-front, .flip-card-back {
-  position:absolute; width:100%; height:100%; -webkit-backface-visibility:hidden; backface-visibility:hidden;
-  border:2px solid white; border-radius:12px; display:flex; flex-direction:column; justify-content:flex-start; align-items:center; color:white; overflow:hidden; text-shadow:1px 1px 3px black;
-}
+.flip-card-front, .flip-card-back { position:absolute; width:100%; height:100%; backface-visibility:hidden; border:2px solid white; border-radius:12px; display:flex; flex-direction:column; justify-content:flex-start; align-items:center; color:white; overflow:hidden; text-shadow:1px 1px 3px black; }
 .flip-card-front { background:rgba(0,0,0,0.6); backdrop-filter:blur(4px); }
 .flip-card-front img { width:100%; height:70%; object-fit:cover; border-bottom:2px solid white; }
 .flip-card-front span { margin-top:5px; font-weight:bold; }
 .flip-card-front .role { font-size:14px; font-weight:normal; color:#ccc; margin-top:2px; }
 .flip-card-back { background:rgba(0,0,0,0.85); transform:rotateY(180deg); font-size:14px; padding:15px; display:flex; justify-content:center; align-items:center; text-align:center; }
-#discord-button { margin-top:20px; padding:8px 20px; border:2px solid white; border-radius:8px; text-decoration:none; color:white; background:rgba(255,255,255,0.1); display:none; }
-#music-controls { margin-top:20px; display:flex; gap:10px; align-items:center; flex-wrap:wrap; justify-content:center; }
-#song-title { font-weight:bold; }
-button { padding:5px 10px; border:none; border-radius:5px; cursor:pointer; background:rgba(255,255,255,0.2); color:white; }
+#discord-button { position:fixed; bottom:20px; left:50%; transform:translateX(-50%); padding:8px 20px; border:2px solid white; border-radius:8px; text-decoration:none; color:white; background:rgba(255,255,255,0.1); display:none; }
+#music-controls {
+  position:fixed; bottom:20px; right:20px; display:flex; flex-direction:column; align-items:center; background:rgba(0,0,0,0.6);
+  padding:10px; border-radius:10px; gap:5px;
+}
+#song-title { font-weight:bold; margin-bottom:5px; max-width:200px; text-align:center; }
+.controls-row { display:flex; gap:5px; }
+button { padding:5px 10px; border:none; border-radius:5px; cursor:pointer; background:rgba(255,255,255,0.2); color:white; font-size:18px; }
 button.active { background:white; color:black; }
-#progress-container { width:300px; height:10px; background:rgba(255,255,255,0.2); border-radius:5px; overflow:hidden; }
+#progress-container { width:200px; height:10px; background:rgba(255,255,255,0.2); border-radius:5px; overflow:hidden; margin-top:5px; }
 #progress-bar { width:0%; height:100%; background:white; }
 </style>
 </head>
@@ -39,9 +40,7 @@ button.active { background:white; color:black; }
 
 <div id="enter-screen">CLICK TO ENTER</div>
 
-<audio id="bg-music" loop>
-  <source src="music/wasted.mp3" type="audio/mpeg">
-</audio>
+<audio id="bg-music"></audio>
 
 <script>
 // Roster with bios
@@ -58,15 +57,22 @@ const roster = [
   {name:'@2n9Banshee', role:'Member', img:'images/banshee.jpg', bio:'Banshee\'s just here for the fun.'},
 ];
 
-// Songs
+// Songs list
 const songs = [
-  {title:'Wasted - Juice Wrld Ft. Lil Uzi Vert', src:'music/wasted.mp3'}
+  {title:'Wasted - Juice Wrld Ft. Lil Uzi Vert', src:'music/wasted.mp3'},
+  {title:'Song 2', src:'music/song2.mp3'},
+  {title:'Song 3', src:'music/song3.mp3'}
 ];
+
+let currentIndex = 0;
+let isShuffle = false;
+let isLoop = false;
 
 const overlay = document.getElementById('enter-screen');
 const music = document.getElementById('bg-music');
 
 overlay.addEventListener('click', () => {
+    music.src = songs[currentIndex].src;
     const playPromise = music.play();
     if(playPromise !== undefined){
         playPromise.then(() => initPage()).catch(() => initPage());
@@ -87,6 +93,7 @@ function initPage(){
     title.textContent = '@2n9 Roster';
     content.appendChild(title);
 
+    // Cards 5 per row
     const container = document.createElement('div');
     container.className = 'container';
     roster.forEach(member=>{
@@ -105,37 +112,59 @@ function initPage(){
     });
     content.appendChild(container);
 
-    // Music controls
+    // Discord button
+    const discordBtn = document.createElement('a');
+    discordBtn.id = 'discord-button';
+    discordBtn.href = 'https://discord.gg/PxkPnxM2Hb';
+    discordBtn.target = '_blank';
+    discordBtn.textContent = 'JOIN DISCORD';
+    document.body.appendChild(discordBtn);
+    discordBtn.style.display = 'inline-block';
+
+    // Music controls in bottom-right
     const controls = document.createElement('div');
     controls.id = 'music-controls';
 
     const songTitle = document.createElement('span');
     songTitle.id = 'song-title';
-    songTitle.textContent = songs[0].title;
+    songTitle.textContent = songs[currentIndex].title;
     controls.appendChild(songTitle);
 
-    const playBtn = document.createElement('button');
-    playBtn.textContent = 'Play/Pause';
-    playBtn.onclick = () => music.paused ? music.play() : music.pause();
-    controls.appendChild(playBtn);
+    const controlRow = document.createElement('div');
+    controlRow.className = 'controls-row';
 
     const prevBtn = document.createElement('button');
-    prevBtn.textContent = 'Prev';
-    controls.appendChild(prevBtn);
+    prevBtn.textContent = '⏮️';
+    prevBtn.onclick = () => skipSong(-1);
+    controlRow.appendChild(prevBtn);
+
+    const playBtn = document.createElement('button');
+    playBtn.textContent = '⏯️';
+    playBtn.onclick = () => music.paused ? music.play() : music.pause();
+    controlRow.appendChild(playBtn);
 
     const nextBtn = document.createElement('button');
-    nextBtn.textContent = 'Next';
-    controls.appendChild(nextBtn);
+    nextBtn.textContent = '⏭️';
+    nextBtn.onclick = () => skipSong(1);
+    controlRow.appendChild(nextBtn);
 
     const shuffleBtn = document.createElement('button');
-    shuffleBtn.textContent = 'Shuffle';
-    shuffleBtn.onclick = () => shuffleBtn.classList.toggle('active');
-    controls.appendChild(shuffleBtn);
+    shuffleBtn.textContent = '🔀';
+    shuffleBtn.onclick = () => {
+        isShuffle = !isShuffle;
+        shuffleBtn.classList.toggle('active');
+    }
+    controlRow.appendChild(shuffleBtn);
 
     const loopBtn = document.createElement('button');
-    loopBtn.textContent = 'Loop';
-    loopBtn.onclick = () => loopBtn.classList.toggle('active');
-    controls.appendChild(loopBtn);
+    loopBtn.textContent = '🔁';
+    loopBtn.onclick = () => {
+        isLoop = !isLoop;
+        loopBtn.classList.toggle('active');
+    }
+    controlRow.appendChild(loopBtn);
+
+    controls.appendChild(controlRow);
 
     const progressContainer = document.createElement('div');
     progressContainer.id = 'progress-container';
@@ -144,21 +173,40 @@ function initPage(){
     progressContainer.appendChild(progressBar);
     controls.appendChild(progressContainer);
 
-    content.appendChild(controls);
+    document.body.appendChild(controls);
 
-    const discordBtn = document.createElement('a');
-    discordBtn.id = 'discord-button';
-    discordBtn.href = 'https://discord.gg/PxkPnxM2Hb';
-    discordBtn.target = '_blank';
-    discordBtn.textContent = 'JOIN DISCORD';
-    content.appendChild(discordBtn);
-    discordBtn.style.display = 'inline-block';
-
+    // Progress update
     music.ontimeupdate = () => {
         if(!isNaN(music.duration)){
             progressBar.style.width = (music.currentTime/music.duration)*100 + '%';
         }
     };
+
+    // Auto next
+    music.onended = () => {
+        if(isLoop){
+            music.currentTime = 0;
+            music.play();
+        } else {
+            skipSong(1);
+        }
+    };
+}
+
+// Skip function
+function skipSong(direction){
+    if(isShuffle){
+        let nextIndex;
+        do {
+            nextIndex = Math.floor(Math.random()*songs.length);
+        } while(nextIndex === currentIndex);
+        currentIndex = nextIndex;
+    } else {
+        currentIndex = (currentIndex + direction + songs.length) % songs.length;
+    }
+    music.src = songs[currentIndex].src;
+    music.play();
+    document.getElementById('song-title').textContent = songs[currentIndex].title;
 }
 </script>
 
