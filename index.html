@@ -125,17 +125,103 @@ h1 {
   justify-content: center;
   align-items: center;
 }
+
+/* Music progress tracker */
+#music-progress {
+  position: fixed;
+  bottom: 50px;
+  right: 15px;
+  width: 220px;
+  font-family: monospace;
+  color: white;
+  user-select: none;
+  z-index: 20;
+  display: none; /* hidden initially */
+}
+
+#music-title {
+  text-align: center;
+  margin-bottom: 4px;
+  font-size: 14px;
+  color: white;
+  text-shadow: 1px 1px 3px black;
+  font-weight: bold;
+}
+
+#progress-bar {
+  width: 100%;
+  height: 10px;
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 5px;
+  cursor: pointer;
+  position: relative;
+}
+
+#progress-fill {
+  height: 100%;
+  width: 0%;
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 5px;
+}
+
+#progress-handle {
+  position: absolute;
+  top: -3px;
+  left: 0%;
+  width: 16px;
+  height: 16px;
+  background: white;
+  border-radius: 50%;
+  transform: translateX(-50%);
+  cursor: pointer;
+}
+
+#progress-time {
+  text-align: center;
+  font-size: 12px;
+  margin-top: 4px;
+}
+
+/* Discord button at bottom center */
+#discord-button-container {
+  position: fixed;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 20;
+  display: none; /* hidden initially */
+}
+
+#discord-button {
+  display: inline-block;
+  padding: 12px 28px;
+  font-size: 16px;
+  font-weight: bold;
+  color: white;
+  text-decoration: none;
+  background: rgba(255,255,255,0.1);
+  border: 2px solid white;
+  border-radius: 8px;
+  box-shadow: 0 0 15px rgba(255,255,255,0.5);
+  transition: all 0.3s ease;
+}
+
+#discord-button:hover {
+  background: white;
+  color: black;
+  box-shadow: 0 0 25px white;
+  text-shadow: none;
+}
 </style>
 </head>
 <body>
 
-<!-- Click to enter screen -->
+<!-- Click-to-enter screen -->
 <div id="enter-screen">CLICK TO ENTER...</div>
 
 <!-- Music element -->
 <audio id="bg-music" loop>
   <source src="music/wasted.mp3" type="audio/mpeg">
-  Your browser does not support the audio element.
 </audio>
 
 <h1>@2n9 Roster</h1>
@@ -159,17 +245,69 @@ h1 {
   </div>
 </div>
 
+<!-- Music progress display -->
+<div id="music-progress">
+  <div id="music-title">Wasted - Juice Wrld Ft. Lil Uzi Vert</div>
+  <div id="progress-bar">
+    <div id="progress-fill"></div>
+    <div id="progress-handle"></div>
+  </div>
+  <div id="progress-time">0:00 / 0:00</div>
+</div>
+
+<!-- Discord button -->
+<div id="discord-button-container">
+  <a id="discord-button" href="https://discord.gg/PxkPnxM2Hb" target="_blank">Join the Discord</a>
+</div>
+
 <script>
 const enterScreen = document.getElementById('enter-screen');
 const music = document.getElementById('bg-music');
+const musicProgress = document.getElementById('music-progress');
+const discordButtonContainer = document.getElementById('discord-button-container');
+const progressBar = document.getElementById('progress-bar');
+const progressFill = document.getElementById('progress-fill');
+const progressHandle = document.getElementById('progress-handle');
+const progressTime = document.getElementById('progress-time');
+
+function formatTime(seconds) {
+  const m = Math.floor(seconds / 60) || 0;
+  const s = Math.floor(seconds % 60) || 0;
+  return `${m}:${s < 10 ? '0'+s : s}`;
+}
+
+// Click-to-enter
 enterScreen.addEventListener('click', () => {
   enterScreen.style.display = 'none';
   music.play();
+  musicProgress.style.display = 'block';
+  discordButtonContainer.style.display = 'block';
+});
+
+// Dragging
+let isDragging = false;
+
+music.addEventListener('timeupdate', () => {
+  if (!isDragging) {
+    const percent = (music.currentTime / (music.duration || 1)) * 100;
+    progressFill.style.width = percent + '%';
+    progressHandle.style.left = percent + '%';
+    progressTime.textContent = `${formatTime(music.currentTime)} / ${formatTime(music.duration || 0)}`;
+  }
+});
+
+progressHandle.addEventListener('mousedown', () => { isDragging = true; });
+document.addEventListener('mouseup', () => { isDragging = false; });
+progressBar.addEventListener('click', (e) => {
+  const rect = progressBar.getBoundingClientRect();
+  const percent = (e.clientX - rect.left) / rect.width;
+  music.currentTime = percent * music.duration;
 });
 </script>
 
 </body>
 </html>
+
 
 
 
