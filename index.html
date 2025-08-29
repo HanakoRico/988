@@ -22,7 +22,7 @@ body.entered {
     display:flex; 
     flex-direction:column; 
     align-items:center; 
-    padding-top:20px; 
+    padding-top:20px;
     padding-bottom:120px; 
     width:100%; 
     box-sizing:border-box; 
@@ -78,9 +78,20 @@ button.active { background:white; color:black; }
   <div id="progress-container"><div id="progress-bar"></div></div>
 </div>
 
-<script src="roster.js"></script>
-<script src="sparkle.js"></script>
 <script>
+const roster = [
+  {name:'@2n9Hanako', role:'Owner/founder', img:'images/hanako.jpg', bio:'Hanako is the founder.', links:['https://discord.gg/...']},
+  {name:'@2n9Icey', role:'Member', img:'images/icey.jpg', bio:'Icey is the main editor.', links:[]},
+  {name:'@2n9Melo', role:'Member', img:'images/melo.jpg', bio:'Melo is crazy.', links:[]},
+  {name:'@2n9Tecca', role:'Member', img:'images/tecca.jpg', bio:'Tecca is the artist.', links:[]},
+  {name:'@2n9FbiJr', role:'Member', img:'images/fbijr.jpg', bio:'FbiJr is special.', links:[]},
+  {name:'@2n9Slutting', role:'Member', img:'images/slutting.jpg', bio:'Slutting recruits.', links:[]},
+  {name:'@2n9Zox', role:'Member', img:'images/zox.jpg', bio:'Zox is energetic.', links:[]},
+  {name:'@2n9Bleeding', role:'Member', img:'images/bleeding.jpg', bio:'fedder | up-coming tool dev.', links:[]},
+  {name:'@2n9Juice12am', role:'Member', img:'images/juice12am.jpg', bio:'Juice is scary.', links:[]},
+  {name:'@2n9Banshee', role:'Member', img:'images/banshee.jpg', bio:'Banshee is fun.', links:[]},
+];
+
 const songs = [
   {title:'Wasted - Juice Wrld Ft. Lil Uzi Vert', src:'music/wasted.mp3'},
   {title:'Headshot - Lil Tjay Ft. Polo G & Fivio', src:'music/song2.mp3'},
@@ -116,29 +127,30 @@ overlay.addEventListener('click',()=>{
 });
 
 function loadRoster(){
-  const entries = Object.entries(roster);
-  let i=0;
-  while(i<entries.length){
-    const rowDiv=document.createElement('div');
-    rowDiv.className='row';
-    entries.slice(i,i+5).forEach(([name,m])=>{
-      const card=document.createElement('div'); 
-      card.className='flip-card';
-      card.innerHTML=`
-        <div class="flip-card-inner">
-          <div class="flip-card-front">
-            <img src="${m.img}">
-            <span>${name}</span>
-            <div class="role">${m.role}</div>
-          </div>
-          <div class="flip-card-back">${m.bio}</div>
-        </div>`;
-      card.onclick=()=>location.href=`profile.html?user=${encodeURIComponent(name)}`;
-      rowDiv.appendChild(card);
-    });
-    rowsContainer.appendChild(rowDiv);
-    i+=5;
-  }
+    for(let i=0;i<2;i++){
+        const rowDiv=document.createElement('div');
+        rowDiv.className='row';
+        roster.slice(i*5,i*5+5).forEach(m=>{
+            const card=document.createElement('div'); 
+            card.className='flip-card';
+            card.innerHTML=`
+                <div class="flip-card-inner">
+                    <div class="flip-card-front">
+                        <img src="${m.img}">
+                        <span>${m.name}</span>
+                        <div class="role">${m.role}</div>
+                    </div>
+                    <div class="flip-card-back">
+                        ${m.bio}
+                    </div>
+                </div>
+            `;
+            // Make card clickable to profile
+            card.onclick = ()=> location.href=`profile.html?user=${encodeURIComponent(m.name)}`;
+            rowDiv.appendChild(card);
+        });
+        rowsContainer.appendChild(rowDiv);
+    }
 }
 
 function loadSong(){
@@ -164,3 +176,6 @@ function skipSong(dir){
     music.play().catch(()=>{});
 }
 </script>
+</body>
+</html>
+
