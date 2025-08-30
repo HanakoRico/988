@@ -4,28 +4,15 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <script>
-
   var titles = ["@", "@2", "@2n", "@2n9", "@2n9L", "@2n9Lu", "@2n9Luc", "@2n9Luci", "@2n9Lucif", "@2n9Lucife", "@2n9Lucifer", "@2n9Lucife", "@2n9Lucif", "@2n9Luci", "@2n9Luc", "@2n9Lu", "@2n9L", "@2n9", "@2n", "@2", "@"];
-
   var currentTitleIndex = 0;
-
   function changeTitle() {
-
     document.title = titles[currentTitleIndex];
-
     currentTitleIndex = (currentTitleIndex + 1) % titles.length;
-
   }
-
   setInterval(changeTitle, 400);
-
-
-
-
-
-
-
 </script>
+
 <style>
     body {
         margin:0;
@@ -38,10 +25,10 @@
         justify-content:flex-start;
         min-height:100vh;
 
-        /* 🔹 BACKGROUND — replace with your image or GIF */
+        /* 🔹 BACKGROUND */
         background: url("https://media1.tenor.com/m/qkB68FD12skAAAAC/black-water.gif") no-repeat center center fixed;
         background-size: cover;
-        background-color: black; /* fallback if image doesn't load */
+        background-color: black; /* fallback */
     }
 
     .profile-header {
@@ -77,58 +64,46 @@
         justify-content:center;
     }
 
-   .links a {
-      display: inline-block;  /* Ensure they are displayed inline */
-      padding: 5px;  /* Reduce padding to make the buttons more compact */
-      border: 2px solid white;
-      border-radius: 8px;
-      color: white;
-      text-decoration: none;
-      background: rgba(255, 255, 255, 0.1);
-      font-weight: bold;
-      height: 30px;  /* Set the height to fit the images */
-      width: 30px;  /* Set the width to fit the images */
-      text-align: center;  /* Center-align text if needed */
-  }
+    .links a {
+        display:inline-flex;
+        align-items:center;
+        justify-content:center;
+        padding:6px;
+        border:2px solid white;
+        border-radius:8px;
+        background:rgba(255,255,255,0.1);
+        transition: background 0.3s, transform 0.2s;
+    }
 
-  .links a img {
-    height: 20px;  /* Adjust the image size here */
-    width: 20px;  /* Make sure the width matches height to keep it proportional */
-    object-fit: contain;  /* Ensure images maintain aspect ratio */
-  }
+    .links a:hover {
+        background:rgba(255,255,255,0.25);
+        transform:scale(1.1);
+    }
+
+    .links img {
+        height:20px;   /* consistent small icon size */
+        width:auto;    /* keep proportions */
+        display:block;
+    }
 </style>
 </head>
 <body>
 <div class="profile-header">
-    <img src="../images/lucifer.jpg" alt="@2n9FbiGov">
+    <img src="../images/lucifer.jpg" alt="@2n9Lucifer">
     <h1>@2n9Lucifer</h1>
     <p>Lucifer is mysterious and very harmy.</p>
+
     <div class="links">
-    <a href="https://discord.gg/12am" target="_blank" rel="noopener noreferrer"><img src="../images/icons8-discord-500.png" alt="Discord" height="15px"></a>
-    <a href="https://t.me/pzrot" target="_blank" rel="noopener noreferrer"><img src="../images/icons8-telegram-logo-500.png" height="15px" alt="Telegram" height="15px"></a>
-    <a href="https://doxbin.net/user/forskins" target="_blank" rel="noopener noreferrer"><img src="../images/red_doxbin_kyrr.png" alt="Doxbin" height="15px"></a>
+        <a href="https://discord.gg/12am" target="_blank" rel="noopener noreferrer">
+            <img src="../images/icons8-discord-500.png" alt="Discord">
+        </a>
+        <a href="https://t.me/pzrot" target="_blank" rel="noopener noreferrer">
+            <img src="../images/icons8-telegram-logo-500.png" alt="Telegram">
+        </a>
+        <a href="https://doxbin.net/user/forskins" target="_blank" rel="noopener noreferrer">
+            <img src="../images/red_doxbin_kyrr.png" alt="Doxbin">
+        </a>
     </div>
 </div>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
