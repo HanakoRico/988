@@ -3,7 +3,18 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>@2n9Slutting Profile</title>
+<script>
+var titles = ["@", "@2", "@2n", "@2n9", "@2n9S", "@2n9Sl", "@2n9Slu", "@2n9Slut", "@2n9Slutt", "@2n9Slutti", "@2n9Sluttin", "@2n9Slutting", "@2n9Sluttin", "@2n9Slutti", "@2n9Slutt", "@2n9Slut", "@2n9Slu", "@2n9Sl", "@2n9S", "@2n9", "@2n", "@2", "@"];
+
+var currentTitleIndex = 0;
+
+function changeTitle() {
+  document.title = titles[currentTitleIndex];
+  currentTitleIndex = (currentTitleIndex + 1) % titles.length;
+}
+
+setInterval(changeTitle, 400);
+</script>
 <style>
     body {
         margin:0;
@@ -92,5 +103,6 @@
 </div>
 </body>
 </html>
+
 
 
