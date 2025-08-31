@@ -56,13 +56,20 @@
     }
 
     .links a {
-        padding:8px 15px;
-        border:2px solid white;
-        border-radius:8px;
-        color:white;
-        text-decoration:none;
-        background:rgba(255,255,255,0.1);
-        font-weight:bold;
+        display:inline-flex;
+        align-items:center;
+        justify-content:center;
+        padding:6px;
+        transition: background 0.3s, transform 0.2s;
+    }
+
+    .links a:hover {
+        transform:scale(1.1);
+    }
+
+    .links img {
+        height:42px;
+        width:auto;  
     }
 </style>
 </head>
@@ -85,6 +92,7 @@
 </div>
 </body>
 </html>
+
 
 
 
