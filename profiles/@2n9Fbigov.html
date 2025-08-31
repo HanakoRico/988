@@ -56,13 +56,20 @@
     }
 
     .links a {
-        padding:8px 15px;
-        border:2px solid white;
-        border-radius:8px;
-        color:white;
-        text-decoration:none;
-        background:rgba(255,255,255,0.1);
-        font-weight:bold;
+        display:inline-flex;
+        align-items:center;
+        justify-content:center;
+        padding:6px;
+        transition: background 0.3s, transform 0.2s;
+    }
+
+    .links a:hover {
+        transform:scale(1.1);
+    }
+
+    .links img {
+        height:42px;
+        width:auto;  
     }
 </style>
 </head>
@@ -72,11 +79,18 @@
     <h1>@2n9FbiGov</h1>
     <p>Fbigov is the father of jr and really cool.</p>
     <div class="links">
-        <a href="https://discord.com/users/1390400409503399966">Discord</a>
-        <a href="https://t.me/!2n9ann">Telegram</a>
-        <a href="#">Other</a>
+       <a href="https://discord.gg/12am" target="_blank" rel="noopener noreferrer">
+            <img src="../images/icons8-discord-500.png" alt="Discord">
+        </a>
+        <a href="https://t.me/2n9FBI" target="_blank" rel="noopener noreferrer">
+            <img src="../images/icons8-telegram-logo-500.png" alt="Telegram">
+        </a>
+        <a href="https://doxbin.net/user/2n9" target="_blank" rel="noopener noreferrer">
+            <img src="../images/red_doxbin_kyrr.png" alt="Doxbin">
+        </a>
     </div>
 </div>
 </body>
 </html>
+
 
