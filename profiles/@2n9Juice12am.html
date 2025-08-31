@@ -54,15 +54,21 @@
         flex-wrap:wrap;
         justify-content:center;
     }
-
     .links a {
-        padding:8px 15px;
-        border:2px solid white;
-        border-radius:8px;
-        color:white;
-        text-decoration:none;
-        background:rgba(255,255,255,0.1);
-        font-weight:bold;
+        display:inline-flex;
+        align-items:center;
+        justify-content:center;
+        padding:6px;
+        transition: background 0.3s, transform 0.2s;
+    }
+
+    .links a:hover {
+        transform:scale(1.1);
+    }
+
+    .links img {
+        height:42px;
+        width:auto;  
     }
 </style>
 </head>
@@ -72,13 +78,20 @@
     <h1>@2n9Juice12am</h1>
     <p>Juice is scary thats it.</p>
     <div class="links">
-        <a href="https://discord.com/users/1370860081532637284">Discord</a>
-        <a href="https://t.me/i2n9ann">Telegram</a>
-        <a href="#">Other</a>
+<a href="https://discord.gg/12am" target="_blank" rel="noopener noreferrer">
+            <img src="../images/icons8-discord-500.png" alt="Discord">
+        </a>
+        <a href="https://t.me/i29ann" target="_blank" rel="noopener noreferrer">
+            <img src="../images/icons8-telegram-logo-500.png" alt="Telegram">
+        </a>
+        <a href="https://doxbin.net/user/juice12am" target="_blank" rel="noopener noreferrer">
+            <img src="../images/red_doxbin_kyrr.png" alt="Doxbin">
+        </a>
     </div>
 </div>
 </body>
 </html>
+
 
 
 
