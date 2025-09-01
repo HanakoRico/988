@@ -1,179 +1,105 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>@</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script>
+  var titles = ["@", "@2", "@2n", "@2n9", "@2n9L", "@2n9Lu", "@2n9Luc", "@2n9Luci", "@2n9Lucif", "@2n9Lucife", "@2n9Lucifer", "@2n9Lucife", "@2n9Lucif", "@2n9Luci", "@2n9Luc", "@2n9Lu", "@2n9L", "@2n9", "@2n", "@2", "@"];
+  var currentTitleIndex = 0;
+  function changeTitle() {
+    document.title = titles[currentTitleIndex];
+    currentTitleIndex = (currentTitleIndex + 1) % titles.length;
+  }
+  setInterval(changeTitle, 400);
+</script>
 
-  <script>
-    var titles = ["@", "@2", "@2n", "@2n9", "@2n9L", "@2n9Lu", "@2n9Luc", "@2n9Luci", "@2n9Lucif", "@2n9Lucife", "@2n9Lucifer", "@2n9Lucife", "@2n9Lucif", "@2n9Luci", "@2n9Luc", "@2n9Lu", "@2n9L", "@2n9", "@2n", "@2", "@"];
-    var currentTitleIndex = 0;
-    function changeTitle() {
-      document.title = titles[currentTitleIndex];
-      currentTitleIndex = (currentTitleIndex + 1) % titles.length;
-    }
-    setInterval(changeTitle, 400);
-  </script>
-
-  <style>
+<style>
     body {
-      margin: 0;
-      padding: 0;
-      font-family: Arial, sans-serif;
-      color: white;
-      background: url("https://media1.tenor.com/m/qkB68FD12skAAAAC/black-water.gif") no-repeat center center fixed;
-      background-size: cover;
-      background-color: black;
-      overflow: hidden;
+        margin:0;
+        padding:0;
+        font-family:Arial,sans-serif;
+        color:white;
+        display:flex;
+        flex-direction:column;
+        align-items:center;
+        justify-content:flex-start;
+        min-height:100vh;
+
+        /* 🔹 BACKGROUND */
+        background: url("https://media1.tenor.com/m/qkB68FD12skAAAAC/black-water.gif") no-repeat center center fixed;
+        background-size: cover;
+        background-color: black; /* fallback */
     }
 
-    /* Overlay screen */
-    .start-overlay {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
-      background: rgba(0, 0, 0, 0.9);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      z-index: 999;
-      flex-direction: column;
-      transition: opacity 0.6s ease;
-    }
-
-    .start-overlay h1 {
-      color: white;
-      font-size: 36px;
-      cursor: pointer;
-      padding: 20px 40px;
-      background: rgba(255, 255, 255, 0.1);
-      border: 1px solid white;
-      border-radius: 10px;
-      transition: background 0.3s;
-    }
-
-    .start-overlay h1:hover {
-      background: rgba(255, 255, 255, 0.2);
-    }
-
-    /* Main content (hidden initially) */
-    .main-content {
-      display: none;
-      opacity: 0;
-      transition: opacity 1s ease;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      min-height: 100vh;
+    .profile-header {
+        margin-top:40px;
+        display:flex;
+        flex-direction:column;
+        align-items:center;
     }
 
     .profile-header img {
-      width: 200px;
-      height: 200px;
-      object-fit: cover;
-      border-radius: 12px;
-      border: 2px solid white;
+        width:200px;
+        height:200px;
+        object-fit:cover;
+        border-radius:12px;
+        border:2px solid white;
     }
 
     .profile-header h1 {
-      margin: 10px 0 5px;
+        margin:10px 0 5px;
     }
 
     .profile-header p {
-      max-width: 500px;
-      text-align: center;
-      line-height: 1.5;
+        max-width:500px;
+        text-align:center;
+        line-height:1.5;
     }
 
     .links {
-      display: flex;
-      gap: 15px;
-      margin-top: 20px;
-      flex-wrap: wrap;
-      justify-content: center;
+        display:flex;
+        gap:15px;
+        margin-top:20px;
+        flex-wrap:wrap;
+        justify-content:center;
     }
 
     .links a {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      padding: 6px;
-      transition: background 0.3s, transform 0.2s;
+        display:inline-flex;
+        align-items:center;
+        justify-content:center;
+        padding:6px;
+        transition: background 0.3s, transform 0.2s;
     }
 
     .links a:hover {
-      transform: scale(1.1);
+        transform:scale(1.1);
     }
 
     .links img {
-      height: 42px;
-      width: auto;
+        height:42px;
+        width:auto;  
     }
-
-    audio {
-      margin-top: 20px;
-    }
-  </style>
+</style>
 </head>
-
 <body>
+<div class="profile-header">
+    <img src="../images/lucifer.jpg" alt="@2n9Lucifer">
+    <h1>@2n9Lucifer</h1>
+    <p>Lucifer is mysterious and very harmy.</p>
 
-  <!-- FULL SCREEN OVERLAY -->
-  <div class="start-overlay" id="overlay">
-    <h1 onclick="startSite()">Click to Start</h1>
-  </div>
-
-  <!-- AUDIO -->
-  <audio id="introAudio">
-    <source src="../wasted.mp3" type="audio/mpeg" />
-    Your browser does not support the audio element.
-  </audio>
-
-  <!-- MAIN CONTENT -->
-  <div class="main-content" id="mainContent">
-    <div class="profile-header">
-      <img src="../images/lucifer.jpg" alt="@2n9Lucifer" />
-      <h1>@2n9Lucifer</h1>
-      <p>Lucifer is mysterious and very harmy.</p>
-
-      <div class="links">
+    <div class="links">
         <a href="https://discord.gg/12am" target="_blank" rel="noopener noreferrer">
-          <img src="../images/icons8-discord-500.png" alt="Discord" />
+            <img src="../images/icons8-discord-500.png" alt="Discord">
         </a>
         <a href="https://t.me/pzrot" target="_blank" rel="noopener noreferrer">
-          <img src="../images/icons8-telegram-logo-500.png" alt="Telegram" />
+            <img src="../images/icons8-telegram-logo-500.png" alt="Telegram">
         </a>
         <a href="https://doxbin.net/user/forskins" target="_blank" rel="noopener noreferrer">
-          <img src="../images/red_doxbin_kyrr.png" alt="Doxbin" />
+            <img src="../images/red_doxbin_kyrr.png" alt="Doxbin">
         </a>
-      </div>
     </div>
-  </div>
-
-  <script>
-    function startSite() {
-      // Play audio
-      const audio = document.getElementById("introAudio");
-      audio.play();
-
-      // Fade out overlay
-      const overlay = document.getElementById("overlay");
-      overlay.style.opacity = 0;
-
-      // Show main content
-      const content = document.getElementById("mainContent");
-      content.style.display = "flex";
-
-      setTimeout(() => {
-        overlay.style.display = "none";
-        content.style.opacity = 1;
-      }, 600);
-    }
-  </script>
-
+</div>
 </body>
 </html>
 
