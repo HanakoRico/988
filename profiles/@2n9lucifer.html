@@ -1,144 +1,168 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="icon" href="../images/luci.ico" type="image/x-icon">
-<script>
-  // Title animation
-  var titles = ["@", "@2", "@2n", "@2n9", "@2n9L", "@2n9Lu", "@2n9Luc", "@2n9Luci", "@2n9Lucif", "@2n9Lucife", "@2n9Lucifer", "@2n9Lucife", "@2n9Lucif", "@2n9Luci", "@2n9Luc", "@2n9Lu", "@2n9L", "@2n9", "@2n", "@2", "@"];
-  var currentTitleIndex = 0;
-  function changeTitle() {
-    document.title = titles[currentTitleIndex];
-    currentTitleIndex = (currentTitleIndex + 1) % titles.length;
-  }
-  setInterval(changeTitle, 400);
-</script>
+  <title>@2n9Lucifer</title>
 
-<style>
-    body {
-        margin:0;
-        padding:0;
-        font-family:Arial,sans-serif;
-        color:white;
-        display:flex;
-        flex-direction:column;
-        align-items:center;
-        justify-content:flex-start;
-        min-height:100vh;
-        background: url("https://media1.tenor.com/m/qkB68FD12skAAAAC/black-water.gif") no-repeat center center fixed;
-        background-size: cover;
-        background-color: black;
-        overflow: hidden;
+  <!-- Snow Cursor Script -->
+  <script src="https://cdn.jsdelivr.net/gh/lokesh-coder/snow-cursor/snow-cursor.min.js"></script>
+
+  <script>
+    // Title animation
+    var titles = ["@", "@2", "@2n", "@2n9", "@2n9L", "@2n9Lu", "@2n9Luc", "@2n9Luci", "@2n9Lucif", "@2n9Lucife", "@2n9Lucifer", "@2n9Lucife", "@2n9Lucif", "@2n9Luci", "@2n9Luc", "@2n9Lu", "@2n9L", "@2n9", "@2n", "@2", "@"];
+    var currentTitleIndex = 0;
+    function changeTitle() {
+      document.title = titles[currentTitleIndex];
+      currentTitleIndex = (currentTitleIndex + 1) % titles.length;
     }
+    setInterval(changeTitle, 400);
+  </script>
+
+  <style>
+    * {
+      cursor: none; /* Hide default cursor to show snow cursor */
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+      color: white;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      min-height: 100vh;
+      background: url("https://media1.tenor.com/m/qkB68FD12skAAAAC/black-water.gif") no-repeat center center fixed;
+      background-size: cover;
+      background-color: black;
+      overflow: hidden;
+    }
+
     #enter-screen {
-        position: fixed;
-        top:0; left:0;
-        width:100%; height:100%;
-        background:black;
-        display:flex;
-        align-items:center;
-        justify-content:center;
-        flex-direction:column;
-        z-index:1000;
-        transition: opacity 0.6s ease;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: black;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      z-index: 1000;
+      transition: opacity 0.6s ease;
     }
 
     #enter-screen h2 {
-        font-size:2rem;
-        color:white;
-        cursor:pointer;
-        text-align:center;
+      font-size: 2rem;
+      color: white;
+      cursor: pointer;
+      text-align: center;
     }
 
     #enter-screen.hidden {
-        opacity:0;
-        pointer-events:none;
+      opacity: 0;
+      pointer-events: none;
     }
 
     .profile-header {
-        margin-top:40px;
-        display:flex;
-        flex-direction:column;
-        align-items:center;
+      margin-top: 40px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .floating {
+      animation: float 4s ease-in-out infinite;
+      box-shadow: 0 0 20px white;
+      transition: transform 0.3s ease;
+    }
+
+    @keyframes float {
+      0% { transform: translateY(0); }
+      50% { transform: translateY(-15px); }
+      100% { transform: translateY(0); }
     }
 
     .profile-header img {
-        width:200px;
-        height:200px;
-        object-fit:cover;
-        border-radius:12px;
-        border:2px solid white;
+      width: 200px;
+      height: 200px;
+      object-fit: cover;
+      border-radius: 12px;
+      border: 2px solid white;
     }
 
     .profile-header h1 {
-        margin:10px 0 5px;
+      margin: 10px 0 5px;
     }
 
     .profile-header p {
-        max-width:500px;
-        text-align:center;
-        line-height:1.5;
+      max-width: 500px;
+      text-align: center;
+      line-height: 1.5;
     }
 
     .links {
-        display:flex;
-        gap:15px;
-        margin-top:20px;
-        flex-wrap:wrap;
-        justify-content:center;
+      display: flex;
+      gap: 15px;
+      margin-top: 20px;
+      flex-wrap: wrap;
+      justify-content: center;
     }
 
     .links a {
-        display:inline-flex;
-        align-items:center;
-        justify-content:center;
-        padding:6px;
-        transition: transform 0.2s;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 6px;
+      transition: transform 0.2s ease;
+    }
+
+    .links a img {
+      height: 42px;
+      width: auto;
+      box-shadow: 0 0 15px white;
+      border-radius: 8px;
     }
 
     .links a:hover {
-        transform:scale(1.1);
+      transform: scale(1.1);
     }
 
-    .links img {
-        height:42px;
-        width:auto;  
-    }
-
-    /* Hide audio element */
     audio {
-        display: none;
+      display: none;
     }
-</style>
+  </style>
 </head>
 <body>
 
 <audio id="bg-music" loop>
-    <source src="luci.mp3" type="audio/mpeg">
-    Your browser does not support the audio element.
+  <source src="luci.mp3" type="audio/mpeg">
 </audio>
 
 <div id="enter-screen">
-    <h2>Click to Enter</h2>
+  <h2>Click to Enter</h2>
 </div>
 
 <div class="profile-header" style="display:none;" id="profile-content">
-    <img src="../images/lucifer.jpg" alt="@2n9Lucifer">
-    <h1>@2n9Lucifer</h1>
-    <p>Lucifer is mysterious and very harmy.</p>
+  <img src="../images/lucifer.jpg" alt="@2n9Lucifer" class="floating interactive">
+  <h1>@2n9Lucifer</h1>
+  <p>Lucifer is mysterious and very harmy.</p>
 
-    <div class="links">
-        <a href="https://discord.gg/12am" target="_blank" rel="noopener noreferrer">
-            <img src="../images/icons8-discord-500.png" alt="Discord">
-        </a>
-        <a href="https://t.me/pzrot" target="_blank" rel="noopener noreferrer">
-            <img src="../images/icons8-telegram-logo-500.png" alt="Telegram">
-        </a>
-        <a href="https://doxbin.net/user/forskins" target="_blank" rel="noopener noreferrer">
-            <img src="../images/red_doxbin_kyrr.png" alt="Doxbin">
-        </a>
-    </div>
+  <div class="links">
+    <a href="https://discord.gg/12am" target="_blank" rel="noopener noreferrer">
+      <img src="../images/icons8-discord-500.png" alt="Discord" class="floating interactive">
+    </a>
+    <a href="https://t.me/pzrot" target="_blank" rel="noopener noreferrer">
+      <img src="../images/icons8-telegram-logo-500.png" alt="Telegram" class="floating interactive">
+    </a>
+    <a href="https://doxbin.net/user/forskins" target="_blank" rel="noopener noreferrer">
+      <img src="../images/red_doxbin_kyrr.png" alt="Doxbin" class="floating interactive">
+    </a>
+  </div>
 </div>
 
 <script>
@@ -154,14 +178,21 @@
     }, 600);
     audio.play().catch(err => console.log("Autoplay blocked:", err));
   });
+
+  // Cursor-based hover wiggle
+  document.addEventListener("mousemove", (e) => {
+    const interactiveElements = document.querySelectorAll(".interactive");
+    interactiveElements.forEach(el => {
+      const rect = el.getBoundingClientRect();
+      const centerX = rect.left + rect.width / 2;
+      const offset = (e.clientX - centerX) / 30;
+      el.style.transform = `translateX(${offset}px)`;
+    });
+  });
+
+  // Snow cursor
+  new SnowCursor({ color: "#ffffff", size: 2, speed: 1 });
 </script>
 
 </body>
 </html>
-
-
-
-
-
-
-
