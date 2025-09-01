@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>@</title>
 
   <script>
@@ -21,21 +21,53 @@
       padding: 0;
       font-family: Arial, sans-serif;
       color: white;
+      background: url("https://media1.tenor.com/m/qkB68FD12skAAAAC/black-water.gif") no-repeat center center fixed;
+      background-size: cover;
+      background-color: black;
+      overflow: hidden;
+    }
+
+    /* Overlay screen */
+    .start-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(0, 0, 0, 0.9);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 999;
+      flex-direction: column;
+      transition: opacity 0.6s ease;
+    }
+
+    .start-overlay h1 {
+      color: white;
+      font-size: 36px;
+      cursor: pointer;
+      padding: 20px 40px;
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid white;
+      border-radius: 10px;
+      transition: background 0.3s;
+    }
+
+    .start-overlay h1:hover {
+      background: rgba(255, 255, 255, 0.2);
+    }
+
+    /* Main content (hidden initially) */
+    .main-content {
+      display: none;
+      opacity: 0;
+      transition: opacity 1s ease;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
       min-height: 100vh;
-      background: url("https://media1.tenor.com/m/qkB68FD12skAAAAC/black-water.gif") no-repeat center center fixed;
-      background-size: cover;
-      background-color: black;
-    }
-
-    .profile-header {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      margin-bottom: 30px;
     }
 
     .profile-header img {
@@ -81,66 +113,67 @@
       width: auto;
     }
 
-    .audio-section {
-      margin-top: 40px;
-      text-align: center;
-    }
-
-    .click-button {
-      background-color: white;
-      color: black;
-      padding: 12px 24px;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-      font-size: 18px;
-      transition: background 0.3s, transform 0.2s;
-    }
-
-    .click-button:hover {
-      background-color: #ddd;
-      transform: scale(1.05);
-    }
-
     audio {
-      margin-top: 15px;
+      margin-top: 20px;
     }
   </style>
 </head>
 
 <body>
-  <div class="profile-header">
-    <img src="../images/lucifer.jpg" alt="@2n9Lucifer">
-    <h1>@2n9Lucifer</h1>
-    <p>Lucifer is mysterious and very harmy.</p>
 
-    <div class="links">
-      <a href="https://discord.gg/12am" target="_blank" rel="noopener noreferrer">
-        <img src="../images/icons8-discord-500.png" alt="Discord">
-      </a>
-      <a href="https://t.me/pzrot" target="_blank" rel="noopener noreferrer">
-        <img src="../images/icons8-telegram-logo-500.png" alt="Telegram">
-      </a>
-      <a href="https://doxbin.net/user/forskins" target="_blank" rel="noopener noreferrer">
-        <img src="../images/red_doxbin_kyrr.png" alt="Doxbin">
-      </a>
+  <!-- FULL SCREEN OVERLAY -->
+  <div class="start-overlay" id="overlay">
+    <h1 onclick="startSite()">Click to Start</h1>
+  </div>
+
+  <!-- AUDIO -->
+  <audio id="introAudio">
+    <source src="../wasted.mp3" type="audio/mpeg" />
+    Your browser does not support the audio element.
+  </audio>
+
+  <!-- MAIN CONTENT -->
+  <div class="main-content" id="mainContent">
+    <div class="profile-header">
+      <img src="../images/lucifer.jpg" alt="@2n9Lucifer" />
+      <h1>@2n9Lucifer</h1>
+      <p>Lucifer is mysterious and very harmy.</p>
+
+      <div class="links">
+        <a href="https://discord.gg/12am" target="_blank" rel="noopener noreferrer">
+          <img src="../images/icons8-discord-500.png" alt="Discord" />
+        </a>
+        <a href="https://t.me/pzrot" target="_blank" rel="noopener noreferrer">
+          <img src="../images/icons8-telegram-logo-500.png" alt="Telegram" />
+        </a>
+        <a href="https://doxbin.net/user/forskins" target="_blank" rel="noopener noreferrer">
+          <img src="../images/red_doxbin_kyrr.png" alt="Doxbin" />
+        </a>
+      </div>
     </div>
   </div>
 
-  <!-- AUDIO PLAYER SECTION -->
-  <div class="audio-section">
-    <button class="click-button" onclick="playAudio()">Click Here...</button>
-    <audio id="myAudio" controls>
-      <source src="../wasted.mp3" type="audio/mpeg">
-      Your browser does not support the audio element.
-    </audio>
-  </div>
-
   <script>
-    function playAudio() {
-      const audio = document.getElementById("myAudio");
+    function startSite() {
+      // Play audio
+      const audio = document.getElementById("introAudio");
       audio.play();
+
+      // Fade out overlay
+      const overlay = document.getElementById("overlay");
+      overlay.style.opacity = 0;
+
+      // Show main content
+      const content = document.getElementById("mainContent");
+      content.style.display = "flex";
+
+      setTimeout(() => {
+        overlay.style.display = "none";
+        content.style.opacity = 1;
+      }, 600);
     }
   </script>
+
 </body>
 </html>
+
