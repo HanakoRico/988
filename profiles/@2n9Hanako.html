@@ -6,10 +6,7 @@
   <link rel="icon" href="../images/hanako.ico" type="image/x-icon">
 
   <style>
-    * {
-      cursor: none; /* Hide native cursor */
-    }
-
+    * { cursor: none; }
     body {
       margin: 0;
       padding: 0;
@@ -24,8 +21,6 @@
       background-size: cover;
       overflow: hidden;
     }
-
-    /* 🔹 Enter screen */
     #enter-screen {
       position: fixed;
       top: 0;
@@ -44,8 +39,6 @@
       opacity: 0;
       pointer-events: none;
     }
-
-    /* 🔹 Floating effects */
     .floating {
       animation: float 4s ease-in-out infinite;
       box-shadow: 0 0 20px white;
@@ -61,14 +54,17 @@
       50% { transform: translateY(-15px); }
       100% { transform: translateY(0); }
     }
-
-    /* 🔹 Profile */
     .profile-header {
       margin-top: 40px;
       display: flex;
       flex-direction: column;
       align-items: center;
       z-index: 1;
+      opacity: 0;
+      transition: opacity 1s ease;
+    }
+    .profile-header.show {
+      opacity: 1;
     }
     .profile-header img {
       width: 200px;
@@ -85,8 +81,6 @@
       text-align: center;
       line-height: 1.5;
     }
-
-    /* 🔹 Links */
     .links {
       display: flex;
       gap: 15px;
@@ -110,11 +104,7 @@
     .links a:hover {
       transform: scale(1.1);
     }
-
-    /* 🔹 Music hidden */
     audio { display: none; }
-
-    /* 🔹 Snow particles */
     #snow-trail {
       position: fixed;
       top: 0;
@@ -148,21 +138,17 @@
   <source src="hanako.mp3" type="audio/mpeg">
 </audio>
 
-<!-- Enter screen -->
 <div id="enter-screen">
   <h2 class="floating-text">Click to Enter</h2>
 </div>
 
-<!-- Snow container -->
 <div id="snow-trail"></div>
 
-<!-- Profile content -->
-<div class="profile-header" style="display:none;" id="profile-content">
+<div class="profile-header" id="profile-content">
   <img src="../images/hanako.jpg" alt="@2n9Hanako" class="floating interactive">
   <h1 class="floating-text">@2n9Hanako</h1>
   <p class="floating-text">Founder / Owner / Dev</p>
   <p class="floating-text">Hanako is the founder, he oversees every operation.</p>
-
   <div class="links">
     <a href="https://discord.gg/PxkPnxM2Hb" target="_blank">
       <img src="../images/icons8-discord-500.png" alt="Discord" class="floating interactive">
@@ -177,29 +163,23 @@
 </div>
 
 <script>
-  /* 🔹 Animated tab title */
   const titles = ["@", "@2", "@2n", "@2n9", "@2n9H", "@2n9Ha", "@2n9Han", "@2n9Hana", "@2n9Hanak", "@2n9Hanako", "@2n9Hanak", "@2n9Hana", "@2n9Han", "@2n9Ha", "@2n9H", "@2n9", "@2n", "@2", "@"];
   let currentTitleIndex = 0;
   setInterval(() => {
     document.title = titles[currentTitleIndex];
     currentTitleIndex = (currentTitleIndex + 1) % titles.length;
   }, 400);
-
   const enterScreen = document.getElementById("enter-screen");
   const profileContent = document.getElementById("profile-content");
   const audio = document.getElementById("bg-music");
-
-  /* 🔹 Enter click */
   enterScreen.addEventListener("click", () => {
     enterScreen.classList.add("hidden");
     setTimeout(() => {
       enterScreen.style.display = "none";
-      profileContent.style.display = "flex";
+      profileContent.classList.add("show");
     }, 600);
     audio.play().catch(err => console.log("Autoplay blocked:", err));
   });
-
-  /* 🔹 Hover wiggle */
   document.addEventListener("mousemove", (e) => {
     const interactiveElements = document.querySelectorAll(".interactive");
     interactiveElements.forEach(el => {
@@ -209,8 +189,6 @@
       el.style.transform = `translateX(${offset}px)`;
     });
   });
-
-  /* 🔹 Snow trail */
   const snowTrail = document.getElementById("snow-trail");
   document.addEventListener("mousemove", function(e) {
     const snowflake = document.createElement("div");
@@ -224,5 +202,3 @@
 
 </body>
 </html>
-
-
