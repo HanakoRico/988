@@ -1,108 +1,146 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<script>
-  var titles = ["@", "@2", "@2n", "@2n9", "@2n9L", "@2n9Lu", "@2n9Luc", "@2n9Luci", "@2n9Lucif", "@2n9Lucife", "@2n9Lucifer", "@2n9Lucife", "@2n9Lucif", "@2n9Luci", "@2n9Luc", "@2n9Lu", "@2n9L", "@2n9", "@2n", "@2", "@"];
-  var currentTitleIndex = 0;
-  function changeTitle() {
-    document.title = titles[currentTitleIndex];
-    currentTitleIndex = (currentTitleIndex + 1) % titles.length;
-  }
-  setInterval(changeTitle, 400);
-</script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>@</title>
 
-<style>
+  <script>
+    var titles = ["@", "@2", "@2n", "@2n9", "@2n9L", "@2n9Lu", "@2n9Luc", "@2n9Luci", "@2n9Lucif", "@2n9Lucife", "@2n9Lucifer", "@2n9Lucife", "@2n9Lucif", "@2n9Luci", "@2n9Luc", "@2n9Lu", "@2n9L", "@2n9", "@2n", "@2", "@"];
+    var currentTitleIndex = 0;
+    function changeTitle() {
+      document.title = titles[currentTitleIndex];
+      currentTitleIndex = (currentTitleIndex + 1) % titles.length;
+    }
+    setInterval(changeTitle, 400);
+  </script>
+
+  <style>
     body {
-        margin:0;
-        padding:0;
-        font-family:Arial,sans-serif;
-        color:white;
-        display:flex;
-        flex-direction:column;
-        align-items:center;
-        justify-content:flex-start;
-        min-height:100vh;
-
-        /* 🔹 BACKGROUND */
-        background: url("https://media1.tenor.com/m/qkB68FD12skAAAAC/black-water.gif") no-repeat center center fixed;
-        background-size: cover;
-        background-color: black; /* fallback */
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+      color: white;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      background: url("https://media1.tenor.com/m/qkB68FD12skAAAAC/black-water.gif") no-repeat center center fixed;
+      background-size: cover;
+      background-color: black;
     }
 
     .profile-header {
-        margin-top:40px;
-        display:flex;
-        flex-direction:column;
-        align-items:center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-bottom: 30px;
     }
 
     .profile-header img {
-        width:200px;
-        height:200px;
-        object-fit:cover;
-        border-radius:12px;
-        border:2px solid white;
+      width: 200px;
+      height: 200px;
+      object-fit: cover;
+      border-radius: 12px;
+      border: 2px solid white;
     }
 
     .profile-header h1 {
-        margin:10px 0 5px;
+      margin: 10px 0 5px;
     }
 
     .profile-header p {
-        max-width:500px;
-        text-align:center;
-        line-height:1.5;
+      max-width: 500px;
+      text-align: center;
+      line-height: 1.5;
     }
 
     .links {
-        display:flex;
-        gap:15px;
-        margin-top:20px;
-        flex-wrap:wrap;
-        justify-content:center;
+      display: flex;
+      gap: 15px;
+      margin-top: 20px;
+      flex-wrap: wrap;
+      justify-content: center;
     }
 
     .links a {
-        display:inline-flex;
-        align-items:center;
-        justify-content:center;
-        padding:6px;
-        transition: background 0.3s, transform 0.2s;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 6px;
+      transition: background 0.3s, transform 0.2s;
     }
 
     .links a:hover {
-        transform:scale(1.1);
+      transform: scale(1.1);
     }
 
     .links img {
-        height:42px;
-        width:auto;  
+      height: 42px;
+      width: auto;
     }
-</style>
+
+    .audio-section {
+      margin-top: 40px;
+      text-align: center;
+    }
+
+    .click-button {
+      background-color: white;
+      color: black;
+      padding: 12px 24px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 18px;
+      transition: background 0.3s, transform 0.2s;
+    }
+
+    .click-button:hover {
+      background-color: #ddd;
+      transform: scale(1.05);
+    }
+
+    audio {
+      margin-top: 15px;
+    }
+  </style>
 </head>
+
 <body>
-<div class="profile-header">
+  <div class="profile-header">
     <img src="../images/lucifer.jpg" alt="@2n9Lucifer">
     <h1>@2n9Lucifer</h1>
     <p>Lucifer is mysterious and very harmy.</p>
 
     <div class="links">
-        <a href="https://discord.gg/12am" target="_blank" rel="noopener noreferrer">
-            <img src="../images/icons8-discord-500.png" alt="Discord">
-        </a>
-        <a href="https://t.me/pzrot" target="_blank" rel="noopener noreferrer">
-            <img src="../images/icons8-telegram-logo-500.png" alt="Telegram">
-        </a>
-        <a href="https://doxbin.net/user/forskins" target="_blank" rel="noopener noreferrer">
-            <img src="../images/red_doxbin_kyrr.png" alt="Doxbin">
-        </a>
+      <a href="https://discord.gg/12am" target="_blank" rel="noopener noreferrer">
+        <img src="../images/icons8-discord-500.png" alt="Discord">
+      </a>
+      <a href="https://t.me/pzrot" target="_blank" rel="noopener noreferrer">
+        <img src="../images/icons8-telegram-logo-500.png" alt="Telegram">
+      </a>
+      <a href="https://doxbin.net/user/forskins" target="_blank" rel="noopener noreferrer">
+        <img src="../images/red_doxbin_kyrr.png" alt="Doxbin">
+      </a>
     </div>
-</div>
+  </div>
+
+  <!-- AUDIO PLAYER SECTION -->
+  <div class="audio-section">
+    <button class="click-button" onclick="playAudio()">Click Here...</button>
+    <audio id="myAudio" controls>
+      <source src="../wasted.mp3" type="audio/mpeg">
+      Your browser does not support the audio element.
+    </audio>
+  </div>
+
+  <script>
+    function playAudio() {
+      const audio = document.getElementById("myAudio");
+      audio.play();
+    }
+  </script>
 </body>
 </html>
-
-
-
-
