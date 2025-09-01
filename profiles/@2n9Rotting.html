@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script>
+var titles = ["@", "@2", "@2n", "@2n9", "@2n9R", "@2n9Ro", "@2n9Rot", "@2n9Rott", "@2n9Rotti", "@2n9Rottin", "@2n9Rotting", "@2n9Rottin", "@2n9Rotti", "@2n9Rott", "@2n9Rot", "@2n9Ro", "@2n9R", "@2n9", "@2n", "@2", "@"];
+
+var currentTitleIndex = 0;
+
+function changeTitle() {
+  document.title = titles[currentTitleIndex];
+  currentTitleIndex = (currentTitleIndex + 1) % titles.length;
+}
+
+setInterval(changeTitle, 400);
+</script>
+
+<style>
+body {
+    margin:0;
+    padding:0;
+    font-family:Arial,sans-serif;
+    color:white;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:flex-start;
+    min-height:100vh;
+    background: url("https://media1.tenor.com/m/qkB68FD12skAAAAC/black-water.gif") no-repeat center center fixed;
+    background-size: cover;
+    background-color: black;
+}
+
+.profile-header {
+    margin-top:40px;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+}
+
+.profile-header img {
+    width:200px;
+    height:200px;
+    object-fit:cover;
+    border-radius:12px;
+    border:2px solid white;
+}
+
+.profile-header h1 {
+    margin:10px 0 5px;
+}
+
+.profile-header p {
+    max-width:500px;
+    text-align:center;
+    line-height:1.5;
+}
+
+.links {
+    display:flex;
+    gap:15px;
+    margin-top:20px;
+    flex-wrap:wrap;
+    justify-content:center;
+}
+
+.links a {
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    padding:6px;
+    transition: background 0.3s, transform 0.2s;
+}
+
+.links a:hover {
+    transform:scale(1.1);
+}
+
+.links img {
+    height:42px;
+    width:auto;  
+}
+</style>
+</head>
+<body>
+<div class="profile-header">
+    <img src="../images/tecca.jpg" alt="@2n9Rotting">
+    <h1>@2n9Rotting</h1>
+    <p>The newest member of @2n9.</p>
+    <div class="links">
+        <a href="https://discord.gg/yEsazxNa" target="_blank" rel="noopener noreferrer">
+            <img src="../images/icons8-discord-500.png" alt="Discord">
+        </a>
+        <a href="https://t.me/i2n9ann" target="_blank" rel="noopener noreferrer">
+            <img src="../images/icons8-telegram-logo-500.png" alt="Telegram">
+        </a>
+        <a href="https://doxbin.com/2n9" target="_blank" rel="noopener noreferrer">
+            <img src="../images/red_doxbin_kyrr.png" alt="Doxbin">
+        </a>
+    </div>
+</div>
+</body>
+</html>
