@@ -24,11 +24,9 @@
         align-items:center;
         justify-content:flex-start;
         min-height:100vh;
-
-        /* 🔹 BACKGROUND */
         background: url("https://media1.tenor.com/m/qkB68FD12skAAAAC/black-water.gif") no-repeat center center fixed;
         background-size: cover;
-        background-color: black; /* fallback */
+        background-color: black;
     }
 
     .profile-header {
@@ -80,9 +78,21 @@
         height:42px;
         width:auto;  
     }
+
+    /* Hide audio element */
+    audio {
+        display: none;
+    }
 </style>
 </head>
 <body>
+
+<!-- 🔊 BACKGROUND AUDIO -->
+<audio autoplay loop>
+    <source src="../wasted.mp3" type="audio/mpeg">
+    Your browser does not support the audio element.
+</audio>
+
 <div class="profile-header">
     <img src="../images/lucifer.jpg" alt="@2n9Lucifer">
     <h1>@2n9Lucifer</h1>
@@ -102,4 +112,6 @@
 </div>
 </body>
 </html>
+
+
 
