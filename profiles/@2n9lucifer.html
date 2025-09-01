@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <script>
+  // Title animation
   var titles = ["@", "@2", "@2n", "@2n9", "@2n9L", "@2n9Lu", "@2n9Luc", "@2n9Luci", "@2n9Lucif", "@2n9Lucife", "@2n9Lucifer", "@2n9Lucife", "@2n9Lucif", "@2n9Luci", "@2n9Luc", "@2n9Lu", "@2n9L", "@2n9", "@2n", "@2", "@"];
   var currentTitleIndex = 0;
   function changeTitle() {
@@ -27,6 +28,33 @@
         background: url("https://media1.tenor.com/m/qkB68FD12skAAAAC/black-water.gif") no-repeat center center fixed;
         background-size: cover;
         background-color: black;
+        overflow: hidden;
+    }
+
+    /* Click to Enter Screen */
+    #enter-screen {
+        position: fixed;
+        top:0; left:0;
+        width:100%; height:100%;
+        background:black;
+        display:flex;
+        align-items:center;
+        justify-content:center;
+        flex-direction:column;
+        z-index:1000;
+        transition: opacity 0.6s ease;
+    }
+
+    #enter-screen h2 {
+        font-size:2rem;
+        color:white;
+        cursor:pointer;
+        text-align:center;
+    }
+
+    #enter-screen.hidden {
+        opacity:0;
+        pointer-events:none;
     }
 
     .profile-header {
@@ -67,7 +95,7 @@
         align-items:center;
         justify-content:center;
         padding:6px;
-        transition: background 0.3s, transform 0.2s;
+        transition: transform 0.2s;
     }
 
     .links a:hover {
@@ -88,12 +116,17 @@
 <body>
 
 <!-- 🔊 BACKGROUND AUDIO -->
-<audio autoplay loop>
-    <source src="music/wasted.mp3" type="audio/mpeg">
+<audio id="bg-music" loop>
+    <source src="../music/wasted.mp3" type="audio/mpeg">
     Your browser does not support the audio element.
 </audio>
 
-<div class="profile-header">
+<!-- CLICK TO ENTER SCREEN -->
+<div id="enter-screen">
+    <h2>Click to Enter</h2>
+</div>
+
+<div class="profile-header" style="display:none;" id="profile-content">
     <img src="../images/lucifer.jpg" alt="@2n9Lucifer">
     <h1>@2n9Lucifer</h1>
     <p>Lucifer is mysterious and very harmy.</p>
@@ -110,9 +143,22 @@
         </a>
     </div>
 </div>
+
+<script>
+  const enterScreen = document.getElementById("enter-screen");
+  const profileContent = document.getElementById("profile-content");
+  const audio = document.getElementById("bg-music");
+
+  enterScreen.addEventListener("click", () => {
+    enterScreen.classList.add("hidden");
+    setTimeout(() => {
+      enterScreen.style.display = "none";
+      profileContent.style.display = "flex";
+    }, 600);
+    audio.play().catch(err => console.log("Autoplay blocked:", err));
+  });
+</script>
+
 </body>
 </html>
-
-
-
 
