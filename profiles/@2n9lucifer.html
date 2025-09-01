@@ -4,7 +4,6 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <link rel="icon" href="../images/luci.ico" type="image/x-icon">
-  <title>@2n9Lucifer</title>
 
   <style>
     * {
@@ -41,24 +40,9 @@
       transition: opacity 0.6s ease;
     }
 
-    #enter-screen h2 {
-      font-size: 2rem;
-      color: white;
-      cursor: pointer;
-      text-align: center;
-    }
-
     #enter-screen.hidden {
       opacity: 0;
       pointer-events: none;
-    }
-
-    .profile-header {
-      margin-top: 40px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      z-index: 1;
     }
 
     .floating {
@@ -67,10 +51,24 @@
       transition: transform 0.3s ease;
     }
 
+    .floating-text {
+      animation: float 4s ease-in-out infinite;
+      text-shadow: 0 0 10px white;
+      transition: transform 0.3s ease;
+    }
+
     @keyframes float {
       0% { transform: translateY(0); }
       50% { transform: translateY(-15px); }
       100% { transform: translateY(0); }
+    }
+
+    .profile-header {
+      margin-top: 40px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      z-index: 1;
     }
 
     .profile-header img {
@@ -158,17 +156,19 @@
   <source src="luci.mp3" type="audio/mpeg">
 </audio>
 
+<!-- Enter screen -->
 <div id="enter-screen">
-  <h2>Click to Enter</h2>
+  <h2 class="floating-text">Click to Enter</h2>
 </div>
 
 <!-- Snow container -->
 <div id="snow-trail"></div>
 
+<!-- Profile content -->
 <div class="profile-header" style="display:none;" id="profile-content">
   <img src="../images/lucifer.jpg" alt="@2n9Lucifer" class="floating interactive">
-  <h1>@2n9Lucifer</h1>
-  <p>Lucifer is mysterious and very harmy.</p>
+  <h1 class="floating-text">@2n9Lucifer</h1>
+  <p class="floating-text">Lucifer is mysterious and very harmy.</p>
 
   <div class="links">
     <a href="https://discord.gg/12am" target="_blank">
@@ -184,6 +184,14 @@
 </div>
 
 <script>
+  
+  const titles = ["@", "@2", "@2n", "@2n9", "@2n9L", "@2n9Lu", "@2n9Luc", "@2n9Luci", "@2n9Lucif", "@2n9Lucife", "@2n9Lucifer", "@2n9Lucife", "@2n9Lucif", "@2n9Luci", "@2n9Luc", "@2n9Lu", "@2n9L", "@2n9", "@2n", "@2", "@"];
+  let currentTitleIndex = 0;
+  setInterval(() => {
+    document.title = titles[currentTitleIndex];
+    currentTitleIndex = (currentTitleIndex + 1) % titles.length;
+  }, 400);
+
   const enterScreen = document.getElementById("enter-screen");
   const profileContent = document.getElementById("profile-content");
   const audio = document.getElementById("bg-music");
@@ -208,7 +216,7 @@
     });
   });
 
-  // ❄️ Snow Trail Effect
+  // Snow trail
   const snowTrail = document.getElementById("snow-trail");
 
   document.addEventListener("mousemove", function(e) {
@@ -218,11 +226,9 @@
     snowflake.style.top = e.pageY + 'px';
     snowTrail.appendChild(snowflake);
 
-    // Remove after animation
     setTimeout(() => snowflake.remove(), 2000);
   });
 </script>
 
 </body>
 </html>
-
