@@ -5,114 +5,31 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="icon" href="images/osiiiz_....ico" type="image/x-icon">
 <script>
-
   var titles = ["@", "@2", "@2n", "@2n9", "@2n9m", "@2n9me", "@2n9mem", "@2n9memb", "@2n9membe", "@2n9member", "@2n9members", "@2n9member", "@2n9membe", "@2n9memb", "@2n9mem", "@2n9me", "@2n9m", "@2n9", "@2n", "@2", "@"];
-
   var currentTitleIndex = 0;
-
   function changeTitle() {
-
     document.title = titles[currentTitleIndex];
-
     currentTitleIndex = (currentTitleIndex + 1) % titles.length;
-
   }
-
   setInterval(changeTitle, 400);
-
-
-
-
-
-
-
 </script>
 <style>
-html, body { margin:0; padding:0; font-family:Arial,sans-serif; background:black; color:white; height:100%; overflow-x:hidden; overflow-y:auto; cursor: none; }
+html, body { margin:0; padding:0; font-family:Arial,sans-serif; background:black; color:white; height:100%; overflow-x:hidden; overflow-y:auto; cursor:none; }
 #enter-screen { position:fixed; top:0; left:0; width:100%; height:100%; display:flex; justify-content:center; align-items:center; font-size:36px; cursor:pointer; background:black; z-index:9999; }
 #page-content, #music-controls, #bottom-buttons { display:none; }
 body.entered { background:url('https://imgs.search.brave.com/x1L4RBHwDSW4bFoHqyaImJxdIOjjrJ78OjO5tgYcn7c/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9tZWRp/YTEudGVub3IuY29t/L20vc1NKWU4xRWdw/aU1BQUFBZC9ibGFj/ay1hZXN0aGV0aWMt/Z2lmLmdpZg.gif?v=1') center center fixed; background-size:cover; }
 #page-content { display:flex; flex-direction:column; align-items:center; padding-top:20px; padding-bottom:120px; width:100%; box-sizing:border-box; }
 h1 { text-align:center; margin-bottom:20px; }
 .row { display:flex; gap:20px; margin-bottom:20px; justify-content:center; flex-wrap:wrap; }
-.flip-card {
-  background-color: transparent;
-  width: 150px;
-  height: 220px;
-  perspective: 1000px;
-  cursor: pointer;
-  flex-shrink: 0;
-}
-
-.flip-card-inner {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  transition: transform 0.6s;
-  transform-style: preserve-3d;
-}
-
-.flip-card:hover .flip-card-inner {
-  transform: rotateY(180deg);
-}
-
-.flip-card-front,
-.flip-card-back {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  backface-visibility: hidden;
-  border: 2px solid white;
-  border-radius: 12px;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: center;
-  color: white;
-  overflow: hidden;
-  text-shadow: 1px 1px 3px black;
-  box-sizing: border-box;
-}
-
-.flip-card-front {
-  background: rgba(0,0,0,0.6);
-  backdrop-filter: blur(4px);
-}
-
-.flip-card-front img {
-  width: 100%;
-  height: 65%;
-  object-fit: cover;
-  border-bottom: 2px solid white;
-}
-
-.flip-card-front span {
-  margin-top: 5px;
-  font-weight: bold;
-  text-align: center;
-}
-
-.flip-card-front .role {
-  font-size: 12px;
-  font-weight: normal;
-  color: #ccc;
-  margin-top: 2px;
-  text-align: center;
-}
-
-.flip-card-back {
-  background: rgba(0,0,0,0.85);
-  transform: rotateY(180deg);
-  font-size: 12px;
-  padding: 10px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-}
-
+.flip-card { background-color: transparent; width:150px; height:220px; perspective:1000px; cursor:pointer; flex-shrink:0; }
+.flip-card-inner { position: relative; width:100%; height:100%; transition: transform 0.6s; transform-style: preserve-3d; }
+.flip-card:hover .flip-card-inner { transform: rotateY(180deg); }
+.flip-card-front, .flip-card-back { position:absolute; top:0; left:0; width:100%; height:100%; backface-visibility:hidden; border:2px solid white; border-radius:12px; display:flex; flex-direction:column; justify-content:flex-start; align-items:center; color:white; overflow:hidden; text-shadow:1px 1px 3px black; box-sizing:border-box; }
+.flip-card-front { background:rgba(0,0,0,0.6); backdrop-filter:blur(4px); }
+.flip-card-front img { width:100%; height:65%; object-fit:cover; border-bottom:2px solid white; }
+.flip-card-front span { margin-top:5px; font-weight:bold; text-align:center; }
+.flip-card-front .role { font-size:12px; font-weight:normal; color:#ccc; margin-top:2px; text-align:center; }
+.flip-card-back { background:rgba(0,0,0,0.85); transform:rotateY(180deg); font-size:12px; padding:10px; display:flex; justify-content:center; align-items:center; text-align:center; }
 #bottom-buttons { position:fixed; bottom:20px; left:50%; transform:translateX(-50%); display:flex; gap:20px; z-index:100; }
 #bottom-buttons a { padding:8px 20px; border:2px solid white; border-radius:8px; text-decoration:none; color:white; background:rgba(255,255,255,0.1); font-weight:bold; }
 #music-controls { position:fixed; bottom:20px; right:20px; display:flex; flex-direction:column; align-items:center; background:rgba(0,0,0,0.6); padding:10px; border-radius:10px; gap:5px; z-index:100; }
@@ -122,7 +39,6 @@ button { padding:5px 10px; border:none; border-radius:5px; cursor:pointer; backg
 button.active { background:white; color:black; }
 #progress-container { width:200px; height:10px; background:rgba(255,255,255,0.2); border-radius:5px; overflow:hidden; margin-top:5px; }
 #progress-bar { width:0%; height:100%; background:white; }
-
 /* Cursor sparkles */
 .sparkle { position:absolute; width:4px; height:4px; background:white; border-radius:50%; pointer-events:none; animation:fade 0.5s linear forwards; }
 @keyframes fade { 0% {opacity:1;} 100% {opacity:0; transform:translateY(-10px);} }
@@ -141,7 +57,7 @@ button.active { background:white; color:black; }
 
 <div id="bottom-buttons">
   <a href="https://discord.gg/3W2q9KEFpm" target="_blank" rel="noopener noreferrer"><img src="images/icons8-discord-500.png" alt="Discord" height="35px"></a>
-  <a href="https://t.me/12n9ann" target="_blank" rel="noopener noreferrer"><img src="images/icons8-telegram-logo-500.png" height="35px" alt="Telegram" height="30px"></a>
+  <a href="https://t.me/12n9ann" target="_blank" rel="noopener noreferrer"><img src="images/icons8-telegram-logo-500.png" height="35px" alt="Telegram"></a>
   <a href="https://doxbin.net/user/2n9" target="_blank" rel="noopener noreferrer"><img src="images/red_doxbin_kyrr.png" alt="Doxbin" height="35px"></a>
 </div>
 
@@ -159,12 +75,15 @@ button.active { background:white; color:black; }
 
 <script>
 const roster = [
+  {name:'@2n9vampirina', role:'Member', img:'images/vampirina.jpg', bio:'Click on me.', profile:'profiles/@2n9vampirina.html'},
   {name:'@2n9Icey', role:'Member', img:'images/icey.jpg', bio:'Click on me.', profile:'profiles/@2n9Icey.html'},
   {name:'@2n9Melo', role:'Member', img:'images/melo.jpg', bio:'Click on me.', profile:'profiles/@2n9Melo.html'},
   {name:'@2n9Hanako', role:'Owner/founder', img:'images/hanako.jpg', bio:'Click on me.', profile:'profiles/@2n9Hanako.html'},
-  {name:'@2n9Lucifer', role:'Co Owner', img:'images/lucifer.jpg', bio:'Click on me.', profile:'profiles/@2n9lucifer.html'},
-  {name:'@2n9Rotting', role:'Member', img:'images/rotting.jpg', bio:'Click on me.', profile:'profiles/@2n9rotting.html'}, // <-- updated
+  {name:'@2n9Lucifer', role:'Co Owner', img:'images/lucifer.jpg', bio:'Click on me.', profile:'profiles/@2n9Lucifer.html'},
+  {name:'@2n9Rotting', role:'Member', img:'images/rotting.jpg', bio:'Click on me.', profile:'profiles/@2n9Rotting.html'},
   {name:'@2n9FbiJr', role:'Member', img:'images/fbi.jpg', bio:'Click on me.', profile:'profiles/@2n9FbiJr.html'},
+
+  {name:'@2n9Tecca', role:'Member', img:'images/tecca.jpg', bio:'Click on me.', profile:'profiles/@2n9Tecca.html'},
   {name:'@2n9Slutting', role:'Member', img:'images/slutting.jpg', bio:'Click on me.', profile:'profiles/@2n9Slutting.html'},
   {name:'@2n9Bleeding', role:'Member', img:'images/bleeding.jpg', bio:'Click on me.', profile:'profiles/@2n9Bleeding.html'},
   {name:'@2n9Zox', role:'Admin', img:'images/zox.jpg', bio:'Click on me.', profile:'profiles/@2n9Zox.html'},
@@ -219,9 +138,11 @@ overlay.addEventListener('click',()=>{
 
 function loadRoster(){
     for(let i=0;i<2;i++){
-        const rowDiv=document.createElement('div');
+        const rowDiv = document.createElement('div');
         rowDiv.className='row';
-        roster.slice(i*6,i*6+6).forEach(m=>{
+        const rowMembers = roster.slice(i*7, i*7 + 7);
+
+        rowMembers.forEach(m=>{
             const card=document.createElement('div');
             card.className='flip-card';
             card.innerHTML=`<div class="flip-card-inner">
@@ -231,6 +152,7 @@ function loadRoster(){
             card.onclick=()=>{ window.location.href=m.profile; }
             rowDiv.appendChild(card);
         });
+
         rowsContainer.appendChild(rowDiv);
     }
 }
@@ -270,37 +192,3 @@ document.addEventListener('mousemove', e=>{
 </script>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
