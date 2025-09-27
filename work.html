@@ -94,6 +94,49 @@ h1 {
   text-shadow: 0 0 5px purple;
   transform: translateY(-1px);
 }
+  #music-controls {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: rgba(0,0,0,0.6);
+  padding: 10px;
+  border-radius: 10px;
+  gap: 5px;
+  z-index: 100;
+}
+#song-title {
+  font-weight: bold;
+  margin-bottom: 5px;
+  max-width: 200px;
+  text-align: center;
+  color: white;
+}
+.controls-row {
+  display: flex;
+  gap: 5px;
+}
+button {
+  padding: 5px 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  background: rgba(255,255,255,0.2);
+  color: white;
+  font-size: 18px;
+}
+button.active { background:white; color:black; }
+#progress-container {
+  width:200px;
+  height:10px;
+  background: rgba(255,255,255,0.2);
+  border-radius:5px;
+  overflow:hidden;
+  margin-top:5px;
+}
+#progress-bar { width:0%; height:100%; background:white; }
 
 /* Responsive adjustments */
 @media (max-width: 1280px) {
@@ -196,8 +239,62 @@ h1 {
   then we switched it back to 988 we work together as a whole and are back after a 10 month break<br>
   we are back and better and this is what we've done since we've been back.
 </p>
+<!-- Music player -->
+<audio id="bg-music"></audio>
+<div id="music-controls">
+  <span id="song-title"></span>
+  <div class="controls-row">
+    <button id="shuffle">⇆</button>
+    <button id="prev">⏮</button>
+    <button id="play">⏯</button>
+    <button id="next">⏭</button>
+    <button id="loop">↻</button>
+  </div>
+  <div id="progress-container"><div id="progress-bar"></div></div>
+</div>
 
-</p>
+<script>
+// Songs array
+const songs = [
+  {title:'Wasted - Juice WRLD Ft. Lil Uzi Vert', src:'music/wasted.mp3'},
+  {title:'Headshot - Lil Tjay Ft. Polo G & Fivio', src:'music/song2.mp3'},
+  {title:'All the time - Destroy Lonely', src:'music/song3.mp3'}
+];
+
+let currentIndex=0, isShuffle=false, isLoop=false;
+const music=document.getElementById('bg-music');
+const songTitle=document.getElementById('song-title');
+const playBtn=document.getElementById('play');
+const prevBtn=document.getElementById('prev');
+const nextBtn=document.getElementById('next');
+const shuffleBtn=document.getElementById('shuffle');
+const loopBtn=document.getElementById('loop');
+const progressBar=document.getElementById('progress-bar');
+
+function loadSong(){
+    music.src=songs[currentIndex].src;
+    songTitle.textContent=songs[currentIndex].title;
+}
+loadSong();
+
+playBtn.onclick=()=>music.paused?music.play():music.pause();
+prevBtn.onclick=()=>skipSong(-1);
+nextBtn.onclick=()=>skipSong(1);
+shuffleBtn.onclick=()=>{isShuffle=!isShuffle; shuffleBtn.classList.toggle('active');};
+loopBtn.onclick=()=>{isLoop=!isLoop; loopBtn.classList.toggle('active');};
+
+music.ontimeupdate=()=>{ if(!isNaN(music.duration)) progressBar.style.width=(music.currentTime/music.duration)*100+'%'; }
+music.onended=()=>{ if(isLoop){ music.currentTime=0; music.play(); } else { skipSong(1); } }
+
+function skipSong(dir){
+    if(isShuffle){
+        let next; do{ next=Math.floor(Math.random()*songs.length);}while(next===currentIndex);
+        currentIndex=next;
+    } else { currentIndex=(currentIndex+dir+songs.length)%songs.length; }
+    loadSong();
+    music.play().catch(()=>{});
+}
+</script>
 
 </body>
 </html>
