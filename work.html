@@ -1,297 +1,113 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="scanlines.css">
-  <title>{ Tramatic }</title>
-  <audio id="bg-music" loop>
-     <source src="/ukiyo.wtf/roster/audio/Tramatic Music.mp3">
-</audio>
-  <style>
-    @import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Our Work</title>
+<style>
+body {
+  background-color: #000;
+  color: #ccc;
+  font-family: Arial, sans-serif;
+  font-size: 16px;
+  margin: 0;
+  padding: 60px 20px; /* more top/bottom padding */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
+}
 
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+h1 {
+  color: purple;
+  margin-bottom: 60px; /* more space below title */
+}
 
-    body {
-      background-color: #000;
-      color: #ccc;
-      font-family: 'VT323', monospace;
-      font-size: 1.5rem;
-      height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      flex-direction: column;
-    }
+.our-work-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(2, auto);
+  gap: 60px 40px; /* vertical gap 60px, horizontal 40px */
+  width: 100%;
+  max-width: 1200px;
+  justify-items: center;
+}
 
-    .navbar {
-      position: absolute;
-      top: 20px;
-      display: flex;
-      gap: 5px; /* Reduced gap */
-    }
+.our-work-box {
+  background-color: rgba(0, 0, 0, 0.85);
+  border: 1px solid #444;
+  padding: 40px;
+  width: 100%;
+  max-width: 300px;
+  box-shadow: 0 0 25px #222;
+  text-align: center;
+  border-radius: 10px;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
 
-    .navbar button {
-      background-color: rgba(0, 0, 0, 0.75);
-      color: #ccc;
-      border: 1px solid #444;
-      padding: 8px 45px;
-      font-size: 1.2rem;
-      font-family: 'VT323', monospace;
-      cursor: pointer;
-      transition: all 0.3s;
-      text-align: center;
-      border-radius: 5px;
-      flex: 1;
-    }
+.our-work-box:hover {
+  transform: translateY(-7px);
+  box-shadow: 0 0 35px #555;
+}
 
-    .navbar button:hover {
-      color: #f33;
-      text-shadow: 0 0 5px #f33;
-      background-color: #333;
-    }
+.our-work-box .name {
+  font-weight: bold;
+  font-size: 1.4rem;
+  color: purple;
+  margin-bottom: 12px;
+}
 
-    .navbar button.active {
-      background-color: #333;
-    }
+.our-work-box .description {
+  color: #aaa;
+  margin: 12px 0;
+  font-size: 1rem;
+}
 
-    .page {
-      display: none;
-      width: 100%;
-      text-align: center;
-    }
+.our-work-box .click-me {
+  color: purple;
+  text-decoration: none;
+  font-weight: bold;
+  transition: text-shadow 0.3s;
+}
 
-    .active {
-      display: block;
-    }
-
-    .roster-box {
-      background-color: rgba(0, 0, 0, 0.85);
-      border: 1px solid #444;
-      padding: 40px;
-      width: 400px; /* Keeping the same width */
-      box-shadow: 0 0 20px #222;
-      animation: flicker 1.5s infinite alternate;
-      margin: 10px;
-      text-align: center; /* Align text to the left */
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%); /* Centering the box */
-    }
-
-    .roster-section h2 {
-      font-size: 2rem;
-      color: #eee;
-      margin-bottom: 10px;
-      text-transform: uppercase;
-      letter-spacing: 2px;
-    }
-
-    .roster-section ul {
-      list-style: none;
-      padding: 0;
-    }
-
-    .roster-section li {
-      margin: 5px 0;
-    }
-
-    .roster-section a {
-      color: #aaa;
-      text-decoration: none;
-      transition: color 0.3s ease;
-    }
-
-    .roster-section a:hover {
-      color: #f33;
-      text-shadow: 0 0 5px #f33;
-    }
-
-    .goal-page {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      flex-direction: column;
-      height: 80vh;
-    }
-
-    .goal-page p {
-      font-size: 2rem; /* Larger font size */
-      color: #aaa;
-      max-width: 800px;
-      text-align: center;
-    }
-
-    .goal-page textarea {
-      display: none;
-    }
-
-    .our-work-box {
-      background-color: rgba(0, 0, 0, 0.85);
-      border: 1px solid #444;
-      padding: 10px;
-      width: 400px;
-      box-shadow: 0 0 20px #222;
-      animation: flicker 1.5s infinite alternate;
-      margin: 10px;
-      text-align: center;
-      display: inline-block;
-    }
-
-    .our-work-box .description {
-      font-size: 1.4rem;
-      color: #aaa;
-      margin: 15px 0;
-    }
-
-    .our-work-box .click-me {
-      color: #f33;
-      text-decoration: none;
-      font-weight: bold;
-      transition: text-shadow 0.3s;
-    }
-
-    .our-work-box .click-me:hover {
-      text-shadow: 0 0 5px #f33;
-    }
-
-    @keyframes flicker {
-      0% { opacity: 0.95; }
-      100% { opacity: 1; }
-    }
-
-	        .glitch {
-            font-size: 2rem;
-            color: #ff0000;
-            position: relative;
-            animation: glitch 7s infinite, flicker 7s infinite;
-        }
-
-        .flicker-text1 {
-            color: #c3c3c3;
-            animation: flicker1 6s infinite;
-        }
-
-
-        @keyframes flicker {
-            0%, 18%, 22%, 25%, 53%, 57%, 100% {
-                opacity: 1;
-            }
-            20%, 24%, 55% {
-                opacity: 0;
-            }
-        }
-  </style>
+.our-work-box .click-me:hover {
+  text-shadow: 0 0 7px purple;
+}
+</style>
 </head>
 <body>
-  <div class="navbar">
-    <button id="roster-tab" onclick="showPage('roster')">Roster</button>
-    <button id="goal-tab" onclick="showPage('goal')">Description</button>
-    <button id="ourwork-tab" onclick="showPage('ourwork')">Our Work</button>
+<h1>Our Work</h1>
+<div class="our-work-container">
+  <div class="our-work-box">
+    <div class="name">Perkz</div>
+    <p class="description">Perkz is a pedophile who had been doxxed by us then fedded himself.</p>
+    <a href="https://tramatic.cc" class="click-me" target="_blank">Dox coming soon..</a>
   </div>
-
-  <div id="roster" class="page active">
-    <div class="roster-box">
-      <div class="roster-section glitch">
-        <h2>Founders</h2>
-        <ul>
-          <li><a href="https://doxbin.com/user/8000" target="_blank">Dagger</a></li>
-		  <li><a href="https://doxbin.com/user/rack" target="_blank">Rack</a></li>
-		  <li><a href="https://doxbin.com/user/looking" target="_blank">Cards</a></li>
-        </ul>
-      </div>
-      <div class="roster-section glitch">
-        <h2>Admins</h2>
-        <ul>
-          <li><a href="https://doxbin.com/user/crawl" target="_blank">Enact</a></li>
-        </ul>
-      </div>
-      <div class="roster-section glitch">
-        <h2>Members</h2>
-        <ul>
-		  <li><a href="https://doxbin.com/user/2hated" target="_blank">Hate</a></li>
-          <li><a href="https://doxbin.com/user/pumpkin" target="_blank">Blake</a></li>
-        </ul>
-      </div>
-    </div>
+  <div class="our-work-box">
+    <div class="name">Tor terrorist</div>
+    <p class="description">Absolute dumbass extorter named ryan with a room temp iq.</p>
+    <a href="https://tramatic.cc" class="click-me" target="_blank">Dox coming soon..</a>
   </div>
-
-  <div id="goal" class="page">
-    <div class="goal-page">
-      <h2>TRAMATIC #AE</h2>
-      <p id="goal-text ">Tramatic is a group founded by a few friends and we made it our goal and purpose to be a anti-extortion group aka AE the group is open join you just have to provide proof of doing anti-extortion and to contact us join discord.gg/Satanic our groups discriminator is "777" it is in all members discord names if a member is not doing so they will be romoved from the sites roster.</p>
-    </div>
+  <div class="our-work-box">
+    <div class="name">Ccrush</div>
+    <p class="description">Female Extortionist that is nowhere to be found</p>
+    <a href="https://rarbin.com/post/Crush-Extortionist" class="click-me" target="_blank">Dox..</a>
   </div>
-
-  <div id="ourwork" class="page">
-    <h2>Our  Work</h2>
-    <div class="glitch our-work-box ">
-      <h2>Perkz</h2>
-      <p class="description">Perkz is a pedophile who had been doxxed by us then fedded himself.</p>
-      <a href="https://tramatic.cc" class="click-me" target="_blank">Dox coming soon..</a>
-    </div>
-    <div class="glitch our-work-box ">
-      <h2>Tor terrorist</h2>
-      <p class="description">Absolute dumbass extorter named ryan with a room temp iq.</p>
-      <a href="https://tramatic.cc" class="click-me" target="_blank">Dox coming soon..</a>
-    </div>
-    <div class="glitch our-work-box ">
-      <h2>Ccrush</h2>
-      <p class="description">Female Extortionist that is no where to be found</p>
-      <a href="https://rarbin.com/post/Crush-Extortionist" class="click-me" target="_blank">Dox..</a>
-    </div>
-    <div class="glitch our-work-box ">
-      <h2>Yui</h2>
-      <p class="description">Dumb e whore who cycled through 5 guys in 5 days</p>
-      <a href="https://tramatic.cc" class="click-me" target="_blank">Dox...</a>
-    </div>
-    <div class="glitch our-work-box ">
-      <h2>Necromance</h2>
-      <p class="description">Got ran by hanako when Hanako was 11 then tried calling hanako a cutslut</p>
-      <a href="https://tramatic.cc" class="click-me" target="_blank">Dox..</a>
-    </div>
-    <div class="glitch our-work-box ">
-      <h2>Cryptic</h2>
-      <p class="description">Cryptic is a Swedish kid that had a god complex and got check for it. </p>
-      <a href="https://tramatic.cc" class="click-me" target="_blank">Dox coming soon..</a>
-    </div>
+  <div class="our-work-box">
+    <div class="name">Yui</div>
+    <p class="description">Dumb e whore who cycled through 5 guys in 5 days</p>
+    <a href="https://" class="click-me" target="_blank">Dox...</a>
   </div>
-  <script>
-  var titles = ["T", "Tr", "Tra", "Tram", "Trama", "Tramat", "Tramati", "Tramatic", "Tramati", "Tramat", "Trama", "Tram", "Tra", "Tr", "T"];
-  var currentTitleIndex = 0;
-  function changeTitle() {
-      document.title = titles[currentTitleIndex];
-      currentTitleIndex = (currentTitleIndex + 1) % titles.length;
-  }
-  setInterval(changeTitle,200);
-</script>
-            <script>
-const audio = document.getElementById('bg-music');
-function startMusic() {
-    audio.play().catch(err => console.log("Playback blocked:", err));
-    document.removeEventListener('click', startMusic);
-    document.removeEventListener('keydown', startMusic);
-}
-document.addEventListener('click', startMusic);
-document.addEventListener('keydown', startMusic);
-</script>
-  <script>
-    function showPage(page) {
-      const pages = document.querySelectorAll('.page');
-      pages.forEach(p => p.classList.remove('active'));
-
-      const tabs = document.querySelectorAll('.navbar button');
-      tabs.forEach(tab => tab.classList.remove('active'));
-
-      document.getElementById(page).classList.add('active');
-      document.getElementById(page + '-tab').classList.add('active');
-    }
-  </script>
+  <div class="our-work-box">
+    <div class="name">Necromance</div>
+    <p class="description">Got ran by hanako when Hanako was 11 then tried calling hanako a cutslut</p>
+    <a href="https://" class="click-me" target="_blank">Dox..</a>
+  </div>
+  <div class="our-work-box">
+    <div class="name">Cryptic</div>
+    <p class="description">Cryptic is a Swedish kid that had a god complex and got check for it.</p>
+    <a href="https://tramatic.cc" class="click-me" target="_blank">Dox coming soon..</a>
+  </div>
+</div>
 </body>
 </html>
