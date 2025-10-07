@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>1-800</title>
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="scanlines.css">
+
+<meta http-equiv="content-type" content="text/html;charset=utf-8" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- Open Graph Meta Tags -->
+<meta property="og:title" content="1-800">
+<meta property="og:description" content="1-800 Roster.">
+<meta property="og:image" content="tramatic3.png">
+<meta property="og:url" content="https://tramatic.cc">
+<meta property="og:type" content="website">
+
+<style>
+  body {
+    background-color: black; 
+    color: white;
+    font-family: Arial, sans-serif;
+    text-align: center;
+  }
+  .vertical-names {
+    display: flex;
+    flex-direction: column; 
+    gap: 20px; ]
+    font-size: 2em;
+    margin-top: 50px;
+  }
+  .img {
+    max-width: 200px;
+    margin-top: 20px;
+  }
+  .menu a {
+    color: white;
+    text-decoration: none;
+  }
+</style>
+</head>
+
+<body>
+<img src="imgs/pngegg.png" class="img">
+
+<audio id="bg-music" loop>
+     <source src="">
+</audio>
+
+<script>
+var titles = ["1", "1-", "1-8", "1-80", "1-800", "1-80", "1-8", "1-", "1"];
+var currentTitleIndex = 0;
+function changeTitle() {
+    document.title = titles[currentTitleIndex];
+    currentTitleIndex = (currentTitleIndex + 1) % titles.length;
+}
+setInterval(changeTitle,200);
+
+const audio = document.getElementById('bg-music');
+function startMusic() {
+    audio.play().catch(err => console.log("Playback blocked:", err));
+    document.removeEventListener('click', startMusic);
+    document.removeEventListener('keydown', startMusic);
+}
+document.addEventListener('click', startMusic);
+document.addEventListener('keydown', startMusic);
+</script>
+
+<div class="menu glitch vertical-names">
+  <a href="https://988ae.xyz">Hanako</a>
+  <a href="https://988ae.xyz">Nullify</a>
+  <a href="https://988ae.xyz">Lost</a>
+</div>
+
+</body>
+</html>
