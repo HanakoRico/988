@@ -24,10 +24,19 @@
     text-align: center;
   }
 
-  /* Swinging image */
+  /* 1-800 Roster header */
+  .header {
+    font-size: 3em;
+    margin-top: 30px;
+    color: #ffffff;
+    text-shadow: 0 0 10px #ffffff, 0 0 20px #ffffff, 0 0 30px #ffffff;
+    animation: glowPulse 2s infinite;
+  }
+
+  /* Swinging image (¾ of old size) */
   .img {
-    max-width: 150px;
-    margin-top: 0px;
+    max-width: 112px; /* ¾ of 150px */
+    margin-top: 20px;
     animation: swing 3s ease-in-out infinite;
     transform-origin: top center;
     display: inline-block;
@@ -39,23 +48,46 @@
     100% { transform: rotate(5deg); }
   }
 
+  /* Names list */
   .vertical-names {
     display: flex;
     flex-direction: column; 
     gap: 20px;
     font-size: 2em;
-    margin-top: 50px;
+    margin-top: 40px;
   }
 
-  .menu a {
-    color: white;
+  .vertical-names a {
+    color: #ffffff;
     text-decoration: none;
+    text-shadow: 0 0 5px #ffffff, 0 0 10px #ffffff, 0 0 20px #ffffff;
+    animation: glowPulse 2s infinite;
+    transition: 0.3s;
+  }
+
+  .vertical-names a:hover {
+    text-shadow: 0 0 15px #ffffff, 0 0 25px #ffffff, 0 0 40px #ffffff;
+  }
+
+  /* Pulsing white glow */
+  @keyframes glowPulse {
+    0% {
+      text-shadow: 0 0 5px #ffffff, 0 0 10px #ffffff, 0 0 20px #ffffff;
+    }
+    50% {
+      text-shadow: 0 0 20px #ffffff, 0 0 40px #ffffff, 0 0 60px #ffffff;
+    }
+    100% {
+      text-shadow: 0 0 5px #ffffff, 0 0 10px #ffffff, 0 0 20px #ffffff;
+    }
   }
 </style>
 </head>
 
 <body>
 <img src="images/pngegg.png" class="img">
+
+<h1 class="header">1-800 Roster</h1>
 
 <audio id="bg-music" loop>
      <source src="">
@@ -88,3 +120,4 @@ document.addEventListener('keydown', startMusic);
 
 </body>
 </html>
+
