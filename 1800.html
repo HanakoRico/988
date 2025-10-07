@@ -4,23 +4,47 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>1-800</title>
-
   <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="scanlines.css">
 
   <style>
     body {
-      background-color: black; /* full black background */
+      background-color: black;
       color: white;
       font-family: Arial, sans-serif;
-      text-align: center;
       margin: 0;
       padding: 0;
       overflow: hidden;
       height: 100vh;
     }
 
-    /* Transparent anime girl with soft pulsating glow and subtle shadow */
+    #enterOverlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: black;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 10;
+      cursor: pointer;
+      flex-direction: column;
+    }
+
+    #enterOverlay h1 {
+      font-size: 3em;
+      text-shadow: 0 0 10px white, 0 0 20px white;
+      animation: glowPulse 2s infinite;
+    }
+
+    #enterOverlay p {
+      font-size: 1.5em;
+      text-shadow: 0 0 5px white;
+      margin-top: 20px;
+    }
+
     .img {
       position: fixed;
       top: 0;
@@ -30,8 +54,8 @@
       z-index: 0;
       pointer-events: none;
       animation: glowPulse 2s infinite;
-      /* initial softer glow + subtle shadow behind */
       filter: drop-shadow(0 0 5px rgba(255,255,255,0.5)) drop-shadow(0 0 10px rgba(255,255,255,0.3)) drop-shadow(0 10px 10px rgba(0,0,0,0.5));
+      display: none;
     }
 
     .content {
@@ -40,6 +64,8 @@
       left: 50%;
       transform: translate(-50%, -50%);
       z-index: 2;
+      display: none;
+      text-align: center;
     }
 
     .header {
@@ -70,7 +96,6 @@
       transform: scale(1.1);
     }
 
-    /* Shared glow pulse animation (softened) */
     @keyframes glowPulse {
       0%, 100% {
         filter: drop-shadow(0 0 3px rgba(255,255,255,0.4)) drop-shadow(0 0 6px rgba(255,255,255,0.3)) drop-shadow(0 10px 10px rgba(0,0,0,0.5));
@@ -88,10 +113,13 @@
     }
   </style>
 </head>
-
 <body>
 
-  <!-- Transparent Anime Girl with softer pulsating glow -->
+  <div id="enterOverlay">
+    <h1>1-800</h1>
+    <p>Click Anywhere to Enter</p>
+  </div>
+
   <img src="https://www.pngall.com/wp-content/uploads/18/Adventurous-Random-Anime-Girl-Scene-PNG.png" class="img" alt="Anime Girl">
 
   <div class="content">
@@ -104,7 +132,7 @@
   </div>
 
   <audio id="bg-music" loop>
-    <source src="music/1800.mp3"> type="audio/mp3">
+    <source src="music/1800.mp3" type="audio/mpeg">
   </audio>
 
   <script>
@@ -115,19 +143,19 @@
       document.title = titles[currentTitleIndex];
       currentTitleIndex = (currentTitleIndex + 1) % titles.length;
     }
-
     setInterval(changeTitle, 200);
 
     const audio = document.getElementById('bg-music');
+    const overlay = document.getElementById('enterOverlay');
+    const animeGirl = document.querySelector('.img');
+    const content = document.querySelector('.content');
 
-    function startMusic() {
+    overlay.addEventListener('click', () => {
+      overlay.style.display = 'none';
+      animeGirl.style.display = 'block';
+      content.style.display = 'block';
       audio.play().catch(err => console.log("Playback blocked:", err));
-      document.removeEventListener('click', startMusic);
-      document.removeEventListener('keydown', startMusic);
-    }
-
-    document.addEventListener('click', startMusic);
-    document.addEventListener('keydown', startMusic);
+    });
   </script>
 
 </body>
