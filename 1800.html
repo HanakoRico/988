@@ -18,10 +18,14 @@
 
 <style>
   body {
-    background-color: black; 
+    background: url("https://imgs.search.brave.com/8Ta8Bj2GU2FWazDqA8zqtU8WGARrW67olJAJrrcutPc/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9tZWRp/YS50ZW5vci5jb20v/cC1GNUFCQUs2RG9B/QUFBTS9ibGFjay1h/bmQtd2hpdGUtYW5p/bWUuZ2lm.gif") no-repeat center center fixed; /* path to your star gif */
+    background-size: cover;
     color: white;
     font-family: Arial, sans-serif;
     text-align: center;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
   }
 
   /* 1-800 Roster header */
@@ -33,9 +37,9 @@
     animation: glowPulse 2s infinite;
   }
 
-  /* Swinging image (¾ of old size) */
+  /* Swinging image */
   .img {
-    max-width: 112px; /* ¾ of 150px */
+    max-width: 112px; /* ¾ of original 150px */
     margin-top: 20px;
     animation: swing 3s ease-in-out infinite;
     transform-origin: top center;
@@ -48,7 +52,19 @@
     100% { transform: rotate(5deg); }
   }
 
-  /* Names list */
+  /* Glowing pulsing text */
+  @keyframes glowPulse {
+    0% {
+      text-shadow: 0 0 5px #ffffff, 0 0 10px #ffffff, 0 0 20px #ffffff;
+    }
+    50% {
+      text-shadow: 0 0 20px #ffffff, 0 0 40px #ffffff, 0 0 60px #ffffff;
+    }
+    100% {
+      text-shadow: 0 0 5px #ffffff, 0 0 10px #ffffff, 0 0 20px #ffffff;
+    }
+  }
+
   .vertical-names {
     display: flex;
     flex-direction: column; 
@@ -68,19 +84,6 @@
   .vertical-names a:hover {
     text-shadow: 0 0 15px #ffffff, 0 0 25px #ffffff, 0 0 40px #ffffff;
   }
-
-  /* Pulsing white glow */
-  @keyframes glowPulse {
-    0% {
-      text-shadow: 0 0 5px #ffffff, 0 0 10px #ffffff, 0 0 20px #ffffff;
-    }
-    50% {
-      text-shadow: 0 0 20px #ffffff, 0 0 40px #ffffff, 0 0 60px #ffffff;
-    }
-    100% {
-      text-shadow: 0 0 5px #ffffff, 0 0 10px #ffffff, 0 0 20px #ffffff;
-    }
-  }
 </style>
 </head>
 
@@ -90,7 +93,7 @@
 <h1 class="header">1-800 Roster</h1>
 
 <audio id="bg-music" loop>
-     <source src="">
+  <source src="">
 </audio>
 
 <script>
@@ -100,7 +103,7 @@ function changeTitle() {
     document.title = titles[currentTitleIndex];
     currentTitleIndex = (currentTitleIndex + 1) % titles.length;
 }
-setInterval(changeTitle,200);
+setInterval(changeTitle, 200);
 
 const audio = document.getElementById('bg-music');
 function startMusic() {
@@ -120,4 +123,3 @@ document.addEventListener('keydown', startMusic);
 
 </body>
 </html>
-
