@@ -24,12 +24,19 @@
     text-align: center;
   }
 
-  .header {
-    font-size: 3em;
-    margin-top: 30px;
-    color: #ffffff;
-    text-shadow: 0 0 10px #ffffff, 0 0 20px #ffffff, 0 0 30px #ffffff;
-    animation: pulse 2s infinite;
+  /* Swinging image */
+  .img {
+    max-width: 150px;
+    margin-top: 0px;
+    animation: swing 3s ease-in-out infinite;
+    transform-origin: top center;
+    display: inline-block;
+  }
+
+  @keyframes swing {
+    0% { transform: rotate(5deg); }
+    50% { transform: rotate(-5deg); }
+    100% { transform: rotate(5deg); }
   }
 
   .vertical-names {
@@ -37,45 +44,18 @@
     flex-direction: column; 
     gap: 20px;
     font-size: 2em;
-    margin-top: 30px;
+    margin-top: 50px;
   }
 
-  .vertical-names a {
-    color: #ffffff;
+  .menu a {
+    color: white;
     text-decoration: none;
-    text-shadow: 0 0 5px #ffffff, 0 0 10px #ffffff, 0 0 20px #ffffff;
-    animation: pulse 2s infinite;
-    transition: 0.3s;
-  }
-
-  .vertical-names a:hover {
-    text-shadow: 0 0 10px #ffffff, 0 0 20px #ffffff, 0 0 30px #ffffff;
-  }
-
-  .img {
-    max-width: 120px; /* smaller image */
-    margin-top: 20px;
-  }
-
-  /* Pulsing glow animation */
-  @keyframes pulse {
-    0% {
-      text-shadow: 0 0 5px #ffffff, 0 0 10px #ffffff, 0 0 20px #ffffff;
-    }
-    50% {
-      text-shadow: 0 0 20px #ffffff, 0 0 40px #ffffff, 0 0 60px #ffffff;
-    }
-    100% {
-      text-shadow: 0 0 5px #ffffff, 0 0 10px #ffffff, 0 0 20px #ffffff;
-    }
   }
 </style>
 </head>
 
 <body>
 <img src="images/pngegg.png" class="img">
-
-<h1 class="header">1-800 Roster</h1>
 
 <audio id="bg-music" loop>
      <source src="">
