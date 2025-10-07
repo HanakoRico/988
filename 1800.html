@@ -11,8 +11,8 @@
 
 <!-- Open Graph Meta Tags -->
 <meta property="og:title" content="1-800">
-<meta property="og:description" content="1-800 Roster Hanako Lost & Nullify.">
-<meta property="og:image" content="https://wallpapercave.com/wp/wp3110688.jpg">
+<meta property="og:description" content="1-800 Roster.">
+<meta property="og:image" content="nasa.png">
 <meta property="og:url" content="https://988ae.xyz">
 <meta property="og:type" content="website">
 
@@ -26,30 +26,42 @@
     margin: 0;
     padding: 0;
     overflow: hidden;
+    height: 100vh;
   }
 
-  /* 1-800 Roster header */
-  .header {
-    font-size: 3em;
-    margin-top: 30px;
-    color: #ffffff;
-    text-shadow: 0 0 10px #ffffff, 0 0 20px #ffffff, 0 0 30px #ffffff;
-    animation: glowPulse 2s infinite;
-  }
-
-  /* Swinging image */
+  /* Swinging image fixed at top */
   .img {
-    max-width: 112px;
-    margin-top: 20px;
+    position: fixed;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    max-width: 120px;
     animation: swing 3s ease-in-out infinite;
     transform-origin: top center;
-    display: inline-block;
+    z-index: 10;
   }
 
   @keyframes swing {
-    0% { transform: rotate(5deg); }
-    50% { transform: rotate(-5deg); }
-    100% { transform: rotate(5deg); }
+    0% { transform: translateX(-50%) rotate(5deg); }
+    50% { transform: translateX(-50%) rotate(-5deg); }
+    100% { transform: translateX(-50%) rotate(5deg); }
+  }
+
+  /* Centered container for text content */
+  .content {
+    position: absolute;
+    top: 55%; /* scoots roster up a bit */
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  /* Header text */
+  .header {
+    font-size: 3em;
+    margin-bottom: 30px;
+    color: #ffffff;
+    text-shadow: 0 0 10px #ffffff, 0 0 20px #ffffff, 0 0 30px #ffffff;
+    animation: glowPulse 2s infinite;
   }
 
   /* Glowing pulsing text */
@@ -65,12 +77,12 @@
     }
   }
 
+  /* Vertical names list */
   .vertical-names {
     display: flex;
     flex-direction: column;
     gap: 20px;
     font-size: 2em;
-    margin-top: 40px;
   }
 
   .vertical-names a {
@@ -88,9 +100,18 @@
 </head>
 
 <body>
+
 <img src="images/pngegg.png" class="img">
 
-<h1 class="header">1-800 Roster</h1>
+<div class="content">
+  <h1 class="header">1-800 Roster</h1>
+
+  <div class="menu glitch vertical-names">
+    <a href="https://988ae.xyz">Hanako</a>
+    <a href="https://988ae.xyz">Nullify</a>
+    <a href="https://988ae.xyz">Lost</a>
+  </div>
+</div>
 
 <audio id="bg-music" loop>
   <source src="">
@@ -115,11 +136,6 @@ document.addEventListener('click', startMusic);
 document.addEventListener('keydown', startMusic);
 </script>
 
-<div class="menu glitch vertical-names">
-  <a href="https://988ae.xyz">Hanako</a>
-  <a href="https://988ae.xyz">Nullify</a>
-  <a href="https://988ae.xyz">Lost</a>
-</div>
-
 </body>
 </html>
+
