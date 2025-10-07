@@ -1,144 +1,134 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<title>1-800</title>
-<link rel="stylesheet" href="style.css">
-<link rel="stylesheet" href="scanlines.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>1-800</title>
 
-<meta http-equiv="content-type" content="text/html;charset=utf-8" />
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="scanlines.css">
 
-<!-- Open Graph Meta Tags -->
-<meta property="og:title" content="1-800">
-<meta property="og:description" content="1-800 Roster.">
-<meta property="og:image" content="nasa.png">
-<meta property="og:url" content="https://988ae.xyz">
-<meta property="og:type" content="website">
+  <style>
+    body {
+      background-color: black; /* full black background */
+      color: white;
+      font-family: Arial, sans-serif;
+      text-align: center;
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      height: 100vh;
+    }
 
-<style>
-  body {
-    background: url("https://wallpapercave.com/wp/wp3110688.jpg") no-repeat center center fixed;
-    background-size: cover;
-    color: white;
-    font-family: Arial, sans-serif;
-    text-align: center;
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
-    height: 100vh;
-  }
+    /* Transparent anime girl with soft pulsating glow and subtle shadow */
+    .img {
+      position: fixed;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      max-width: 250px;
+      z-index: 0;
+      pointer-events: none;
+      animation: glowPulse 2s infinite;
+      /* initial softer glow + subtle shadow behind */
+      filter: drop-shadow(0 0 5px rgba(255,255,255,0.5)) drop-shadow(0 0 10px rgba(255,255,255,0.3)) drop-shadow(0 10px 10px rgba(0,0,0,0.5));
+    }
 
-  /* Swinging image behind content */
-  .img {
-    position: fixed;
-    top: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    max-width: 120px;
-    animation: swing 3s ease-in-out infinite;
-    transform-origin: top center;
-    z-index: 0; /* put behind content */
-    opacity: 0.85; /* slightly faded for layering effect */
-  }
+    .content {
+      position: absolute;
+      top: 55%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 2;
+    }
 
-  @keyframes swing {
-    0% { transform: translateX(-50%) rotate(5deg); }
-    50% { transform: translateX(-50%) rotate(-5deg); }
-    100% { transform: translateX(-50%) rotate(5deg); }
-  }
+    .header {
+      font-size: 3em;
+      margin-bottom: 30px;
+      color: #ffffff;
+      text-shadow: 0 0 10px #ffffff, 0 0 20px #ffffff, 0 0 30px #ffffff;
+      animation: glowPulse 2s infinite;
+    }
 
-  /* Centered content */
-  .content {
-    position: absolute;
-    top: 55%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    z-index: 2; /* make sure it stays above the image */
-  }
+    .vertical-names {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      font-size: 2em;
+    }
 
-  /* Header text */
-  .header {
-    font-size: 3em;
-    margin-bottom: 30px;
-    color: #ffffff;
-    text-shadow: 0 0 10px #ffffff, 0 0 20px #ffffff, 0 0 30px #ffffff;
-    animation: glowPulse 2s infinite;
-  }
-
-  /* Glowing text animation */
-  @keyframes glowPulse {
-    0% {
+    .vertical-names a {
+      color: #ffffff;
+      text-decoration: none;
       text-shadow: 0 0 5px #ffffff, 0 0 10px #ffffff, 0 0 20px #ffffff;
+      animation: glowPulse 2s infinite;
+      transition: 0.3s ease;
     }
-    50% {
-      text-shadow: 0 0 20px #ffffff, 0 0 40px #ffffff, 0 0 60px #ffffff;
+
+    .vertical-names a:hover {
+      text-shadow: 0 0 15px #ffffff, 0 0 25px #ffffff, 0 0 40px #ffffff;
+      transform: scale(1.1);
     }
-    100% {
-      text-shadow: 0 0 5px #ffffff, 0 0 10px #ffffff, 0 0 20px #ffffff;
+
+    /* Shared glow pulse animation (softened) */
+    @keyframes glowPulse {
+      0%, 100% {
+        filter: drop-shadow(0 0 3px rgba(255,255,255,0.4)) drop-shadow(0 0 6px rgba(255,255,255,0.3)) drop-shadow(0 10px 10px rgba(0,0,0,0.5));
+        text-shadow: 0 0 5px rgba(255,255,255,0.5), 0 0 10px rgba(255,255,255,0.3), 0 0 15px rgba(255,255,255,0.2);
+      }
+      50% {
+        filter: drop-shadow(0 0 12px rgba(255,255,255,0.5)) drop-shadow(0 0 20px rgba(255,255,255,0.4)) drop-shadow(0 15px 15px rgba(0,0,0,0.6));
+        text-shadow: 0 0 20px rgba(255,255,255,0.5), 0 0 40px rgba(255,255,255,0.4), 0 0 60px rgba(255,255,255,0.3);
+      }
     }
-  }
 
-  /* Vertical names list */
-  .vertical-names {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    font-size: 2em;
-  }
-
-  .vertical-names a {
-    color: #ffffff;
-    text-decoration: none;
-    text-shadow: 0 0 5px #ffffff, 0 0 10px #ffffff, 0 0 20px #ffffff;
-    animation: glowPulse 2s infinite;
-    transition: 0.3s;
-  }
-
-  .vertical-names a:hover {
-    text-shadow: 0 0 15px #ffffff, 0 0 25px #ffffff, 0 0 40px #ffffff;
-  }
-</style>
+    @media (max-height: 600px) {
+      .header { font-size: 2.2em; }
+      .vertical-names a { font-size: 1.5em; }
+    }
+  </style>
 </head>
 
 <body>
 
-<!-- Swinging anime girl behind -->
-<img src="https://p1.hiclipart.com/preview/418/863/616/cute-anime-girl-female-anime-character-png-clipart-thumbnail.jpg" class="img">
+  <!-- Transparent Anime Girl with softer pulsating glow -->
+  <img src="https://www.pngall.com/wp-content/uploads/18/Adventurous-Random-Anime-Girl-Scene-PNG.png" class="img" alt="Anime Girl">
 
-<!-- Foreground content -->
-<div class="content">
-  <h1 class="header">1-800 Roster</h1>
-
-  <div class="menu glitch vertical-names">
-    <a href="https://988ae.xyz">Hanako</a>
-    <a href="https://988ae.xyz">Nullify</a>
-    <a href="https://988ae.xyz">Lost</a>
+  <div class="content">
+    <h1 class="header">1-800 Roster</h1>
+    <div class="menu glitch vertical-names">
+      <a href="https://988ae.xyz">Hanako</a>
+      <a href="https://988ae.xyz">Nullify</a>
+      <a href="https://988ae.xyz">Lost</a>
+    </div>
   </div>
-</div>
 
-<audio id="bg-music" loop>
-  <source src="music/1800.mp3">
-</audio>
+  <audio id="bg-music" loop>
+    <source src="music/1800.mp3"> type="audio/mp3">
+  </audio>
 
-<script>
-var titles = ["1", "1-", "1-8", "1-80", "1-800", "1-80", "1-8", "1-", "1"];
-var currentTitleIndex = 0;
-function changeTitle() {
-    document.title = titles[currentTitleIndex];
-    currentTitleIndex = (currentTitleIndex + 1) % titles.length;
-}
-setInterval(changeTitle, 200);
+  <script>
+    const titles = ["1", "1-", "1-8", "1-80", "1-800", "1-80", "1-8", "1-", "1"];
+    let currentTitleIndex = 0;
 
-const audio = document.getElementById('bg-music');
-function startMusic() {
-    audio.play().catch(err => console.log("Playback blocked:", err));
-    document.removeEventListener('click', startMusic);
-    document.removeEventListener('keydown', startMusic);
-}
-document.addEventListener('click', startMusic);
-document.addEventListener('keydown', startMusic);
-</script>
+    function changeTitle() {
+      document.title = titles[currentTitleIndex];
+      currentTitleIndex = (currentTitleIndex + 1) % titles.length;
+    }
+
+    setInterval(changeTitle, 200);
+
+    const audio = document.getElementById('bg-music');
+
+    function startMusic() {
+      audio.play().catch(err => console.log("Playback blocked:", err));
+      document.removeEventListener('click', startMusic);
+      document.removeEventListener('keydown', startMusic);
+    }
+
+    document.addEventListener('click', startMusic);
+    document.addEventListener('keydown', startMusic);
+  </script>
 
 </body>
 </html>
