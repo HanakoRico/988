@@ -31,6 +31,7 @@
       z-index: 10;
       cursor: pointer;
       flex-direction: column;
+      transition: opacity 1s ease;
     }
 
     #enterOverlay h1 {
@@ -56,6 +57,8 @@
       animation: glowPulse 2s infinite;
       filter: drop-shadow(0 0 5px rgba(255,255,255,0.5)) drop-shadow(0 0 10px rgba(255,255,255,0.3)) drop-shadow(0 10px 10px rgba(0,0,0,0.5));
       display: none;
+      opacity: 0;
+      transition: opacity 2s ease;
     }
 
     .content {
@@ -66,6 +69,8 @@
       z-index: 2;
       display: none;
       text-align: center;
+      opacity: 0;
+      transition: opacity 2s ease;
     }
 
     .header {
@@ -131,30 +136,48 @@
     </div>
   </div>
 
-  <audio id="bg-music" loop>
+  <audio id="bg-music" loop preload="auto">
     <source src="music/1800.mp3" type="audio/mpeg">
   </audio>
 
   <script>
-    const titles = ["1", "1-", "1-8", "1-80", "1-800", "1-80", "1-8", "1-", "1"];
+    const titles = ["1","1-","1-8","1-80","1-800","1-80","1-8","1-","1"];
     let currentTitleIndex = 0;
-
-    function changeTitle() {
+    setInterval(() => {
       document.title = titles[currentTitleIndex];
       currentTitleIndex = (currentTitleIndex + 1) % titles.length;
-    }
-    setInterval(changeTitle, 200);
+    }, 200);
 
-    const audio = document.getElementById('bg-music');
     const overlay = document.getElementById('enterOverlay');
     const animeGirl = document.querySelector('.img');
     const content = document.querySelector('.content');
+    const audio = document.getElementById('bg-music');
 
     overlay.addEventListener('click', () => {
-      overlay.style.display = 'none';
+      overlay.style.opacity = 0;
+      setTimeout(() => overlay.style.display = 'none', 1000);
+
       animeGirl.style.display = 'block';
       content.style.display = 'block';
+      setTimeout(() => {
+        animeGirl.style.opacity = 1;
+        content.style.opacity = 1;
+      }, 50);
+
+      audio.volume = 0;
+      audio.currentTime = 0;
       audio.play().catch(err => console.log("Playback blocked:", err));
+
+      let vol = 0;
+      const fadeIn = setInterval(() => {
+        if(vol < 1){
+          vol += 0.02;
+          audio.volume = vol;
+        } else {
+          audio.volume = 1;
+          clearInterval(fadeIn);
+        }
+      }, 50);
     });
   </script>
 
