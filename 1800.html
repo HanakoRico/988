@@ -36,13 +36,13 @@
 
     #enterOverlay h1 {
       font-size: 3em;
-      text-shadow: 0 0 10px white, 0 0 20px white;
+      text-shadow: 0 0 10px red, 0 0 20px red;
       animation: glowPulse 2s infinite;
     }
 
     #enterOverlay p {
       font-size: 1.5em;
-      text-shadow: 0 0 5px white;
+      text-shadow: 0 0 5px red;
       margin-top: 20px;
     }
 
@@ -55,7 +55,7 @@
       z-index: 0;
       pointer-events: none;
       animation: glowPulse 2s infinite;
-      filter: drop-shadow(0 0 5px rgba(255,255,255,0.5)) drop-shadow(0 0 10px rgba(255,255,255,0.3)) drop-shadow(0 10px 10px rgba(0,0,0,0.5));
+      filter: drop-shadow(0 0 5px red) drop-shadow(0 0 10px red) drop-shadow(0 10px 10px rgba(0,0,0,0.5));
       display: none;
       opacity: 0;
       transition: opacity 2s ease;
@@ -63,7 +63,7 @@
 
     .content {
       position: absolute;
-      top: 55%;
+      top: 75%;
       left: 50%;
       transform: translate(-50%, -50%);
       z-index: 2;
@@ -76,8 +76,8 @@
     .header {
       font-size: 3em;
       margin-bottom: 30px;
-      color: #ffffff;
-      text-shadow: 0 0 10px #ffffff, 0 0 20px #ffffff, 0 0 30px #ffffff;
+      color: red;
+      text-shadow: 0 0 10px red, 0 0 20px red, 0 0 30px red;
       animation: glowPulse 2s infinite;
     }
 
@@ -89,26 +89,26 @@
     }
 
     .vertical-names a {
-      color: #ffffff;
+      color: red;
       text-decoration: none;
-      text-shadow: 0 0 5px #ffffff, 0 0 10px #ffffff, 0 0 20px #ffffff;
+      text-shadow: 0 0 5px red, 0 0 10px red, 0 0 20px red;
       animation: glowPulse 2s infinite;
       transition: 0.3s ease;
     }
 
     .vertical-names a:hover {
-      text-shadow: 0 0 15px #ffffff, 0 0 25px #ffffff, 0 0 40px #ffffff;
+      text-shadow: 0 0 15px red, 0 0 25px red, 0 0 40px red;
       transform: scale(1.1);
     }
 
     @keyframes glowPulse {
       0%, 100% {
-        filter: drop-shadow(0 0 3px rgba(255,255,255,0.4)) drop-shadow(0 0 6px rgba(255,255,255,0.3)) drop-shadow(0 10px 10px rgba(0,0,0,0.5));
-        text-shadow: 0 0 5px rgba(255,255,255,0.5), 0 0 10px rgba(255,255,255,0.3), 0 0 15px rgba(255,255,255,0.2);
+        filter: drop-shadow(0 0 3px red) drop-shadow(0 0 6px red) drop-shadow(0 10px 10px rgba(0,0,0,0.5));
+        text-shadow: 0 0 5px red, 0 0 10px red, 0 0 15px red;
       }
       50% {
-        filter: drop-shadow(0 0 12px rgba(255,255,255,0.5)) drop-shadow(0 0 20px rgba(255,255,255,0.4)) drop-shadow(0 15px 15px rgba(0,0,0,0.6));
-        text-shadow: 0 0 20px rgba(255,255,255,0.5), 0 0 40px rgba(255,255,255,0.4), 0 0 60px rgba(255,255,255,0.3);
+        filter: drop-shadow(0 0 12px red) drop-shadow(0 0 20px red) drop-shadow(0 15px 15px rgba(0,0,0,0.6));
+        text-shadow: 0 0 20px red, 0 0 40px red, 0 0 60px red;
       }
     }
 
