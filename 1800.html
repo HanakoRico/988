@@ -16,6 +16,10 @@
       padding: 0;
       overflow: hidden;
       height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
     }
 
     #enterOverlay {
@@ -36,79 +40,67 @@
 
     #enterOverlay h1 {
       font-size: 3em;
-      text-shadow: 0 0 2px white, 0 0 4px white;
+      text-shadow: 0 0 3px white, 0 0 6px white;
       animation: glowPulse 2s infinite;
     }
 
     #enterOverlay p {
       font-size: 1.5em;
-      text-shadow: 0 0 1px white;
+      text-shadow: 0 0 2px white;
       margin-top: 20px;
     }
 
-    .img {
-      position: fixed;
-      top: 0;
-      left: 50%;
-      transform: translateX(-50%);
-      max-width: 250px;
-      z-index: 0;
-      pointer-events: none;
-      animation: glowPulse 2s infinite;
-      filter: drop-shadow(0 0 1px white) drop-shadow(0 0 2px white);
+    .main-section {
+      text-align: center;
       display: none;
       opacity: 0;
       transition: opacity 2s ease;
     }
 
-    .content {
-      position: absolute;
-      top: calc(250px + 60px); /* stays right below image */
-      left: 50%;
-      transform: translateX(-50%);
-      z-index: 2;
-      display: none;
-      text-align: center;
-      opacity: 0;
-      transition: opacity 2s ease;
+    .img {
+      max-width: 250px;
+      animation: glowPulse 2s infinite;
+      filter: drop-shadow(0 0 2px white) drop-shadow(0 0 4px white);
+      pointer-events: none;
+      margin-bottom: 10px;
     }
 
     .header {
       font-size: 3em;
       margin-bottom: 30px;
       color: white;
-      text-shadow: 0 0 2px white, 0 0 4px white;
+      text-shadow: 0 0 3px white, 0 0 6px white;
       animation: glowPulse 2s infinite;
     }
 
     .vertical-names {
       display: flex;
       flex-direction: column;
-      gap: 20px;
+      gap: 15px;
       font-size: 2em;
     }
 
     .vertical-names a {
       color: white;
       text-decoration: none;
-      text-shadow: 0 0 1px white, 0 0 3px white;
+      text-shadow: 0 0 2px white, 0 0 4px white;
       animation: glowPulse 2s infinite;
       transition: 0.3s ease;
     }
 
     .vertical-names a:hover {
-      text-shadow: 0 0 4px white, 0 0 8px white;
-      transform: scale(1.05);
+      text-shadow: 0 0 6px white, 0 0 12px white;
+      transform: scale(1.1);
     }
 
     @keyframes glowPulse {
       0%, 100% {
-        filter: drop-shadow(0 0 1px white);
-        text-shadow: 0 0 1px white, 0 0 3px white;
-      }
-      50% {
         filter: drop-shadow(0 0 2px white);
         text-shadow: 0 0 2px white, 0 0 4px white;
+      }
+      50% {
+        filter: drop-shadow(0 0 4px white);
+        text-shadow: 0 0 4px white, 0 0 8px white;
       }
     }
 
@@ -125,17 +117,19 @@
     <p>Click Anywhere to Enter</p>
   </div>
 
-  <img src="https://www.pngall.com/wp-content/uploads/18/Adventurous-Random-Anime-Girl-Scene-PNG.png" class="img" alt="Anime Girl">
+  <div class="main-section">
+    <img src="https://www.pngall.com/wp-content/uploads/18/Adventurous-Random-Anime-Girl-Scene-PNG.png" class="img" alt="Anime Girl">
 
-  <div class="content">
-    <h1 class="header">1-800 Roster</h1>
-    <div class="menu glitch vertical-names">
-      <a href="https://doxbin.com/user/988ae">Hanako</a>
-      <a href="https://discord.gg/988">Nullify</a>
-      <a href="https://discord.gg/988">Lost</a>
-      <a href="https://doxbin.com/user/kcc">Death</a>
-      <a href="https://discord.gg/988">Zas</a>
-      <a href="https://discord.gg/988">Crappi</a>
+    <div class="content">
+      <h1 class="header">1-800 Roster</h1>
+      <div class="menu glitch vertical-names">
+        <a href="https://doxbin.com/user/malissa">Hanako</a>
+        <a href="https://discord.gg/988">Nullify</a>
+        <a href="https://discord.gg/988">Lost</a>
+        <a href="https://doxbin.com/user/kcc">Death</a>
+        <a href="https://discord.gg/988">Zas</a>
+        <a href="https://discord.gg/988">Crappi</a>
+      </div>
     </div>
   </div>
 
@@ -152,20 +146,15 @@
     }, 200);
 
     const overlay = document.getElementById('enterOverlay');
-    const animeGirl = document.querySelector('.img');
-    const content = document.querySelector('.content');
+    const mainSection = document.querySelector('.main-section');
     const audio = document.getElementById('bg-music');
 
     overlay.addEventListener('click', () => {
       overlay.style.opacity = 0;
       setTimeout(() => overlay.style.display = 'none', 1000);
 
-      animeGirl.style.display = 'block';
-      content.style.display = 'block';
-      setTimeout(() => {
-        animeGirl.style.opacity = 1;
-        content.style.opacity = 1;
-      }, 50);
+      mainSection.style.display = 'block';
+      setTimeout(() => mainSection.style.opacity = 1, 50);
 
       audio.volume = 0;
       audio.currentTime = 0;
