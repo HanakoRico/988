@@ -1,176 +1,167 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>1-800</title>
-  <link rel="stylesheet" href="style.css">
-  <link rel="stylesheet" href="scanlines.css">
-
-  <style>
-    body {
-      background-color: black;
-      color: white;
-      font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 0;
-      overflow: hidden;
-      height: 100vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-    }
-
-    #enterOverlay {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-color: black;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      z-index: 10;
-      cursor: pointer;
-      flex-direction: column;
-      transition: opacity 1s ease;
-    }
-
-    #enterOverlay h1 {
-      font-size: 3em;
-      text-shadow: 0 0 3px white, 0 0 6px white;
-      animation: glowPulse 2s infinite;
-    }
-
-    #enterOverlay p {
-      font-size: 1.5em;
-      text-shadow: 0 0 2px white;
-      margin-top: 20px;
-    }
-
-    .main-section {
-      text-align: center;
-      display: none;
-      opacity: 0;
-      transition: opacity 2s ease;
-    }
-
-    .img {
-      max-width: 250px;
-      animation: glowPulse 2s infinite;
-      filter: drop-shadow(0 0 2px white) drop-shadow(0 0 4px white);
-      pointer-events: none;
-      margin-bottom: 10px;
-    }
-
-    .header {
-      font-size: 3em;
-      margin-bottom: 30px;
-      color: white;
-      text-shadow: 0 0 3px white, 0 0 6px white;
-      animation: glowPulse 2s infinite;
-    }
-
-    .vertical-names {
-      display: flex;
-      flex-direction: column;
-      gap: 15px;
-      font-size: 2em;
-    }
-
-    .vertical-names a {
-      color: white;
-      text-decoration: none;
-      text-shadow: 0 0 2px white, 0 0 4px white;
-      animation: glowPulse 2s infinite;
-      transition: 0.3s ease;
-    }
-
-    .vertical-names a:hover {
-      text-shadow: 0 0 6px white, 0 0 12px white;
-      transform: scale(1.1);
-    }
-
-    @keyframes glowPulse {
-      0%, 100% {
-        filter: drop-shadow(0 0 2px white);
-        text-shadow: 0 0 2px white, 0 0 4px white;
-      }
-      50% {
-        filter: drop-shadow(0 0 4px white);
-        text-shadow: 0 0 4px white, 0 0 8px white;
-      }
-    }
-
-    @media (max-height: 600px) {
-      .header { font-size: 2.2em; }
-      .vertical-names a { font-size: 1.5em; }
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>1-800</title>
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="scanlines.css">
+<style>
+body {
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  font-family: Arial, sans-serif;
+  background-color: black;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#enterOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: black;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  z-index: 10;
+  transition: opacity 1s ease;
+}
+#enterOverlay h1 {
+  font-size: 3em;
+  text-shadow: 0 0 2px white, 0 0 4px white;
+  animation: glowPulse 2s infinite;
+}
+#enterOverlay p {
+  font-size: 1.5em;
+  margin-top: 20px;
+  text-shadow: 0 0 1px white;
+}
+.main-section {
+  text-align: center;
+  opacity: 0;
+  display: none;
+  transition: opacity 1.5s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.main-section img {
+  max-width: 250px;
+  margin-bottom: 20px;
+  filter: drop-shadow(0 0 1px white) drop-shadow(0 0 2px white);
+  animation: glowPulse 2s infinite;
+  pointer-events: none;
+}
+.header {
+  font-size: 3em;
+  margin-bottom: 20px;
+  color: white;
+  text-shadow: 0 0 2px white, 0 0 4px white;
+  animation: glowPulse 2s infinite;
+  cursor: pointer;
+}
+.vertical-names {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  font-size: 2em;
+  align-items: center;
+}
+.vertical-names a {
+  color: #ccc;
+  text-decoration: none;
+  text-shadow: 0 0 2px #444, 0 0 4px #555;
+  animation: glowPulseNames 1.8s infinite;
+  transition: 0.3s ease;
+}
+.vertical-names a:hover {
+  text-shadow: 0 0 8px #bbb, 0 0 14px #ddd;
+  transform: scale(1.05);
+}
+@keyframes glowPulse {
+  0%, 100% {
+    filter: drop-shadow(0 0 1px white) drop-shadow(0 0 2px white);
+    text-shadow: 0 0 1px white, 0 0 2px white;
+  }
+  50% {
+    filter: drop-shadow(0 0 2px white) drop-shadow(0 0 4px white);
+    text-shadow: 0 0 2px white, 0 0 4px white;
+  }
+}
+@keyframes glowPulseNames {
+  0%, 100% {
+    text-shadow: 0 0 2px #555, 0 0 4px #777;
+  }
+  50% {
+    text-shadow: 0 0 6px #999, 0 0 10px #bbb;
+  }
+}
+@media (max-height: 600px) {
+  .header { font-size: 2.2em; }
+  .vertical-names a { font-size: 1.5em; }
+}
+</style>
 </head>
 <body>
-
-  <div id="enterOverlay">
-    <h1>1-800</h1>
-    <p>Click Anywhere to Enter</p>
+<div id="enterOverlay">
+  <h1>1-800</h1>
+  <p>Click Anywhere to Enter</p>
+</div>
+<div class="main-section">
+  <img src="https://www.pngall.com/wp-content/uploads/18/Adventurous-Random-Anime-Girl-Scene-PNG.png" alt="Anime Girl">
+  <h1 class="header" onclick="window.location.href='https://988ae.xyz/setup.html'">1-800 Roster</h1>
+  <div class="vertical-names">
+    <a href="https://doxbin.com/user/malissa">Hanako</a>
+    <a href="https://soundcloud.com/sorryimshy">Shy</a>
+    <a href="https://discord.gg/988">Lost</a>
+    <a href="https://doxbin.com/user/kcc">Death</a>
+    <a href="https://discord.gg/988">Zas</a>
+    <a href="https://discord.gg/988">Crappi</a>
+    <a href="https://larp.ink/j/">Juice</a>
   </div>
-
-  <div class="main-section">
-    <img src="https://www.pngall.com/wp-content/uploads/18/Adventurous-Random-Anime-Girl-Scene-PNG.png" class="img" alt="Anime Girl">
-
-    <div class="content">
-      <h1 class="header" onclick="window.location.href='https://988ae.xyz/setup.html'">1-800 Roster</h1>
-      <div class="menu glitch vertical-names">
-        <a href="https://doxbin.com/user/malissa">Hanako</a>
-        <a href="https://soundcloud.com/sorryimshy">Shy</a>
-        <a href="https://discord.gg/988">Lost</a>
-        <a href="https://doxbin.com/user/kcc">Death</a>
-        <a href="https://discord.gg/988">Zas</a>
-        <a href="https://discord.gg/988">Crappi</a>
-      </div>
-    </div>
-  </div>
-
-  <audio id="bg-music" loop preload="auto">
-    <source src="music/song15.mp3" type="audio/mpeg">
-  </audio>
-
-  <script>
-    const titles = ["1","1-","1-8","1-80","1-800","1-80","1-8","1-","1"];
-    let currentTitleIndex = 0;
-    setInterval(() => {
-      document.title = titles[currentTitleIndex];
-      currentTitleIndex = (currentTitleIndex + 1) % titles.length;
-    }, 200);
-
-    const overlay = document.getElementById('enterOverlay');
-    const mainSection = document.querySelector('.main-section');
-    const audio = document.getElementById('bg-music');
-
-    overlay.addEventListener('click', () => {
-      overlay.style.opacity = 0;
-      setTimeout(() => overlay.style.display = 'none', 1000);
-
-      mainSection.style.display = 'block';
+</div>
+<audio id="bg-music" loop preload="auto">
+  <source src="music/song15.mp3" type="audio/mpeg">
+</audio>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const overlay = document.getElementById('enterOverlay');
+  const mainSection = document.querySelector('.main-section');
+  const audio = document.getElementById('bg-music');
+  overlay.addEventListener('click', () => {
+    overlay.style.opacity = 0;
+    setTimeout(() => {
+      overlay.style.display = 'none';
+      mainSection.style.display = 'flex';
       setTimeout(() => mainSection.style.opacity = 1, 50);
-
-      audio.volume = 0;
-      audio.currentTime = 0;
-      audio.play().catch(err => console.log("Playback blocked:", err));
-
-      let vol = 0;
-      const fadeIn = setInterval(() => {
-        if(vol < 1){
-          vol += 0.02;
-          audio.volume = vol;
-        } else {
-          clearInterval(fadeIn);
-        }
-      }, 50);
-    });
-  </script>
-
+    }, 1000);
+    audio.volume = 0;
+    audio.currentTime = 0;
+    audio.play().catch(err => console.log("Playback blocked:", err));
+    let vol = 0;
+    const fadeIn = setInterval(() => {
+      if(vol < 1){
+        vol = Math.min(vol + 0.02, 1);
+        audio.volume = vol;
+      } else {
+        clearInterval(fadeIn);
+      }
+    }, 50);
+  });
+  const titles = ["1","1-","1-8","1-80","1-800","1-80","1-8","1-","1"];
+  let currentTitleIndex = 0;
+  setInterval(() => {
+    document.title = titles[currentTitleIndex];
+    currentTitleIndex = (currentTitleIndex + 1) % titles.length;
+  }, 200);
+});
+</script>
 </body>
 </html>
