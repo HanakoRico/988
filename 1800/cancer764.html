@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>1-800</title>
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="scanlines.css">
+<style>
+body {
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  font-family: Arial, sans-serif;
+  background-color: black;
+  color: white;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: column;
+  overflow-x: hidden;
+}
+
+#enterOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: black;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  z-index: 10;
+  transition: opacity 1s ease;
+}
+
+#enterOverlay h1 {
+  font-size: 3em;
+  text-shadow: 0 0 2px white, 0 0 4px white;
+  animation: glowPulse 2s infinite;
+}
+#enterOverlay p {
+  font-size: 1.5em;
+  margin-top: 20px;
+  text-shadow: 0 0 1px white;
+}
+
+.main-section {
+  width: 100%;
+  text-align: center;
+  opacity: 0;
+  display: none;
+  transition: opacity 1.5s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 60px 0;
+}
+
+.main-section img {
+  max-width: 250px;
+  margin-bottom: 20px;
+  filter: drop-shadow(0 0 1px white) drop-shadow(0 0 2px white);
+  animation: glowPulse 2s infinite;
+  pointer-events: none;
+}
+
+.header {
+  font-size: 3em;
+  margin-bottom: 20px;
+  color: white;
+  text-shadow: 0 0 2px white, 0 0 4px white;
+  animation: glowPulse 2s infinite;
+  cursor: pointer;
+}
+
+.vertical-names {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  font-size: 2em;
+  align-items: center;
+  margin-bottom: 40px;
+}
+
+.vertical-names a {
+  color: #ccc;
+  text-decoration: none;
+  text-shadow: 0 0 2px #444, 0 0 4px #555;
+  animation: glowPulseNames 1.8s infinite;
+  transition: 0.3s ease;
+}
+
+.vertical-names a:hover {
+  text-shadow: 0 0 8px #bbb, 0 0 14px #ddd;
+  transform: scale(1.05);
+}
+
+/* Paste Area Full Width */
+#pasteArea {
+  width: 95vw; /* almost full screen */
+  max-width: none; /* no max width */
+  min-height: 150px;
+  background: #0d0d0d;
+  color: #ccc;
+  border: 1px solid #333;
+  box-shadow: inset 0 0 10px #000;
+  font-family: "Courier New", monospace;
+  font-size: 14px;
+  padding: 14px;
+  overflow-y: auto;
+  white-space: pre-wrap;
+  word-break: break-word;
+  text-align: left;
+  outline: none;
+  border-radius: 0; /* optional, stretch fully */
+  margin-bottom: 60px;
+}
+
+@keyframes fadeInPaste {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes glowPulse {
+  0%, 100% {
+    filter: drop-shadow(0 0 1px white) drop-shadow(0 0 2px white);
+    text-shadow: 0 0 1px white, 0 0 2px white;
+  }
+  50% {
+    filter: drop-shadow(0 0 2px white) drop-shadow(0 0 4px white);
+    text-shadow: 0 0 2px white, 0 0 4px white;
+  }
+}
+
+@keyframes glowPulseNames {
+  0%, 100% {
+    text-shadow: 0 0 2px #555, 0 0 4px #777;
+  }
+  50% {
+    text-shadow: 0 0 6px #999, 0 0 10px #bbb;
+  }
+}
+
+@media (max-height: 600px) {
+  .header { font-size: 2.2em; }
+  .vertical-names a { font-size: 1.5em; }
+}
+</style>
+</head>
+<body>
+<div id="enterOverlay">
+  <h1>1-800</h1>
+  <p>Click Anywhere to Enter</p>
+</div>
+
+<div class="main-section">
+  <img src="https://www.pngall.com/wp-content/uploads/18/Adventurous-Random-Anime-Girl-Scene-PNG.png" alt="Anime Girl">
+  <h1 class="header" onclick="window.location.href='https://example.com/roster.html'">1-800 Roster</h1>
+  <div class="vertical-names">
+    <a href="#">Member 1</a>
+    <a href="#">Member 2</a>
+    <a href="#">Member 3</a>
+    <a href="#">Member 4</a>
+    <a href="#">Member 5</a>
+    <a href="#">Member 6</a>
+  </div>
+
+  <div id="pasteArea" contenteditable="true" spellcheck="false">
+______/\\\_____/\\\\\\\\\________/\\\\\\\________/\\\\\\\____        
+ __/\\\\\\\___/\\\///////\\\____/\\\/////\\\____/\\\/////\\\__       
+  _\/////\\\__\/\\\_____\/\\\___/\\\____\//\\\__/\\\____\//\\\_      
+   _____\/\\\__\///\\\\\\\\\/___\/\\\_____\/\\\_\/\\\_____\/\\\_     
+    _____\/\\\___/\\\///////\\\__\/\\\_____\/\\\_\/\\\_____\/\\\_    
+     _____\/\\\__/\\\______\//\\\_\/\\\_____\/\\\_\/\\\_____\/\\\_   
+      _____\/\\\_\//\\\______/\\\__\//\\\____/\\\__\//\\\____/\\\__  
+       _____\/\\\__\///\\\\\\\\\/____\///\\\\\\\/____\///\\\\\\\/___ 
+        _____\///_____\/////////________\///////________\///////_____ 
+                              We Love 1-800                               
+                 
+
+_> CMDS: Provide Cancer's Info                                                                                           
+
+-_ Poster: Hanako 1-800 
+
+<_ REASON: You owned a fake 764
+
+ [Table of Contents:]
+ [Proof: Section 1]
+ [Personal Info: Section 2]
+ [House Info: Section 3]
+ [Account names: Section 4]                          ╱|、
+ [Irl Stats: Section 5]                             (˚ˎ 。7  
+ [Police department: Section 6]                     |、˜〵
+ [More Pictures: Section 7]                         じしˍ,)ノ
+ [Credits: Section 8]                            The End Of Cancer
+                               
+------------------------------------------------------Section 1:------------------------------------------------------------
+
+                                              Proof and personal statement
+
+Proof: https://files.catbox.moe/8uabaq.webp
+                                              ⣴⠶⢦⣤⠶⠶⣄            
+Image 1: https://files.catbox.moe/p8gdkd.webp ⣇⠀⠀⠁⠀⢀⣿
+Image 2: https://files.catbox.moe/cz8w2p.webp ⠙⢧⣄⠀⣠⠞⠁
+                                                 ⠉⠛⠃ Don't own / Be responsible shitty extortion groups
+print("My statement:
+Nigga likes owning extortion groups so get fucked by #1-800
+All of Extortion can suck my #1-800 Much Love From:
+Hanako, Shy, Lost, Death, Zas, Juice, & Crappi, also Ty to all the supporters")
+
+------------------------------------------------------Section 2:--------------------------------------------------------------
+
+                                                     Personal Info
+_> First Name: Jonah
+
+_> Last Name: Henderson                                                            
+
+_> Age: 18                                                                     
+
+_> Country: United Kingdom                                    
+                                                           /$$$$$$$$ /$$$$$$  /$$   /$$ /$$   /$$
+_> State: Not in the U.S                                  |_____ $$//$$__  $$| $$  | $$| $$  /$$/
+                                                               /$$/| $$  \__/| $$  | $$| $$ /$$/ 
+_> City: London                                               /$$/ | $$$$$$$ | $$$$$$$$| $$$$$/   
+                                                             /$$/  | $$__  $$|_____  $$| $$  $$
+_> Zip Code: 5872                                           /$$/   | $$  \ $$      | $$| $$\  $$                     
+                                                           /$$/    |  $$$$$$/      | $$| $$ \  $$
+_> Full Address: North Gate Park, Harringay, London       |__/      \______/       |__/|__/  \__/  
+
+------------------------------------------------------Section 3:--------------------------------------------------------------
+
+                                                      House Info
+_> Bedrooms: 3 bedrooms  
+_> Bathrooms: 2 bathrooms  
+         |1-800|  
+          \   /  
+           \_/  
+      __   /^\   __  
+     '  `. \_/ ,'  `  
+  Hanako  \/ \/   Crappi 
+     _,--./| |\.--._  
+  _,'   _.-\_/-._  `._  
+       |   / \   |  
+       |  /   \  |  
+      /   |   |   \  
+    -'    \___/    `-  
+_> Size: 1,200 sq ft  
+_> Estimate: ~$750,000  
+_> Type: Detached / Semi-Detached  
+_> Year built: 1995  
+_> Lot: 0.15 acres  
+_> Parking: 2-car garage  
+_> Heating / Cooling: Central heating, AC  
+_> Exterior: Brick  
+_> Style: Modern / Contemporary
+
+------------------------------------------------------Section 4:--------------------------------------------------------------
+
+                                                     Account names
+_> 764 Announcements Channel: https://t.me/sevn6four
+
+_> Telegram: @skinncancer                                            ⠤⣤⣤⣤⣄⣀⣀⣀⣀⣀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣀⣀⣠⣤⠤⠤⠴⠶⠶⠶⠶
+                                                                     ⢠⣤⣤⡄⣤⣤⣤⠄⣀⠉⣉⣙⠒⠤⣀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣠⠴⠘⣉⢡⣤⡤⠐⣶⡆⢶⠀⣶⣶⡦
+_> Alias: Cancer764                                                   ⣄⢻⣿⣧⠻⠇⠋18⠋00⢘⣿⢳⣦⣌⠳⠄⠀⠀⠀⠀⠀⠀ ⠀⠀⠀⠀⠀⠀⠀⠀⠞⣡⣴⣧⠻⣄⢸⣿⣿⡟⢁⡻⣸⣿⡿⠁
+                                                                      ⠈⠃⠙⢿⣧⣙⠶⣿⣿⡷⢘⣡⣿⣿⣿⣷⣄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢠⣾⣿⣿⣿⣷⣝⡳⠶⠶⠾⣛⣵⡿⠋⠀⠀
+------------------------------------------------------Section 5:----------⠉⠻⣿⣶⠂⠘⠛⠛⠛⢛⡛⠋⠉--------------------⠉⠉⠉⠛⠀⠉⠒⠛------⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+                                                      Irl Stats       ⠀⠀⠀⠀⠀⠀⣿⡇⠀⠀⠀⠀⠀⢸⠃⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀   ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+_> Nationality: British                                               ⠀⠀⠀⠀⠀⠀⣿⡇⠀⠀⠀⠀⠀⣿⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+                                                                             ⢻⡁⠀⠀⠀⠀⠀⢸⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+_> Ethnicity: White                                                  ⠀⠀⠀    ⠀⡇⠀⠀⠀
+                                                                            
+_> Gender: Male
+
+_> Weight: Unknown
+
+------------------------------------------------------Section 6:--------------------------------------------------------------
+
+                                                    Police Department
+_> Location: North Gate Park, Harringay, London
+
+_> Phone Number (Emergency): 999
+_> Phone Number (Non-emergency): 101
+_> Phone Number (From abroad / Metropolitan Police): +44 20 7230 1212
+
+------------------------------------------------------Section 7:--------------------------------------------------------------         
+                                               Pictures of The Cancer 764
+
+_> Pic 1: https://files.catbox.moe/cuw5rz.webp
+_> Pic 2: https://files.catbox.moe/3ohm2t.webp
+_> Pic 3: https://files.catbox.moe/tzhl8b.webp
+------------------------------------------------------Section 8:--------------------------------------------------------------
+                                                         1800 
+                                                       The end.
+
+⠀⠀⠀                                         ⠀⠀⠀⠀⠀⠀⠀⣤⢔⣒⠂⣀⣀⣤⣄⣀⠀⠀
+⠀⠀⠀⠀⠀                                          ⠀⣴⣿⠋⢠⣟⡼⣷⠼⣎⣼⢇⣿⣄⠱⣄
+⠀⠀⠀⠀⠀⠀                                          ⠹⣿⡀⣆⠙⠢⠐⠉⠉⣴⣾⣽⢟⡰⠃
+⠀⠀⠀⠀⠀⠀⠀                                          ⠈⢿⣿⣦⠀⠤⢴⣿⠿⢋⣴⡏⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀                                          ⢸⡙⠻⣿⣶⣦⣭⣉⠁⣿⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀                                          ⠀⣷⠀⠈⠉⠉⠉⠉⠇⡟⠀⠀⠀
+⠀⠀⠀⠀⠀                                         ⠀⢀⠀⠀⣘⣦⣀⠀⠀⣀⡴⠊⠀Remember To trust in 1-800⠀⠀⠀
+⠀⠀⠀⠀                                         ⠀⠀⠈⠙⠛⠛⢻⣿⣿⣿⣿⠻⣧⡀764K All ExtortionK
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀                                          ⠈⠫⣿⠉⠻⣇⠘⠓⠂⣀#Big AE⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀                                           ⠀⠀⣿⠀⠀⠈⠉⠉⠉⠀⠀
+                                         ⢶⣾⣿⣿⣿⣿⣿⣶⣄⠀⠀⠀⣿⠀⠀⠀⠀⠀⠀⠀⠀
+                                         ⠀⠹⣿⣿⣿⣿⣿⣿⣿⣧⠀⢸⣿⠀⠀⠀⠀⠀⠀⠀⠀
+                                          ⠀⠀⠈⠙⠻⢿⣿⣿⠿⠛⣄⢸⡇⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀                                           ⠀⠀⠀⠀⠀⠀⠀⠘⣿⡇⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀                                           ⠀⠀⠀⣿⡁⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀                                           ⠀⣿⠁⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀                                           ⣿⠀⠀⠀
+  </div>
+</div>
+
+<audio id="bg-music" loop preload="auto">
+  <source src="music/song15.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const overlay = document.getElementById('enterOverlay');
+  const mainSection = document.querySelector('.main-section');
+  const audio = document.getElementById('bg-music');
+  const paste = document.getElementById('pasteArea');
+
+  overlay.addEventListener('click', () => {
+    overlay.style.opacity = 0;
+    setTimeout(() => {
+      overlay.style.display = 'none';
+      mainSection.style.display = 'flex';
+      setTimeout(() => mainSection.style.opacity = 1, 50);
+    }, 1000);
+    audio.volume = 0;
+    audio.currentTime = 0;
+    audio.play().catch(err => console.log("Playback blocked:", err));
+    let vol = 0;
+    const fadeIn = setInterval(() => {
+      if(vol < 1){
+        vol = Math.min(vol + 0.02, 1);
+        audio.volume = vol;
+      } else {
+        clearInterval(fadeIn);
+      }
+    }, 50);
+  });
+
+  const titles = ["1","1-","1-8","1-80","1-800","1-80","1-8","1-","1"];
+  let currentTitleIndex = 0;
+  setInterval(() => {
+    document.title = titles[currentTitleIndex];
+    currentTitleIndex = (currentTitleIndex + 1) % titles.length;
+  }, 200);
+});
+</script>
+</body>
+</html>
+
